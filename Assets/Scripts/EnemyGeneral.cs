@@ -4,12 +4,12 @@ public class EnemyGeneral : MonoBehaviour
 {
     [SerializeField] private int health = 10;
     [SerializeField] private int damage = 10;
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float speed = 5f;
     [SerializeField] private float attackRange = 1.5f;
 
     [SerializeField] private float detectRange = 6.0f;
 
-    [SerializeField] private float attackCooldown = 1f;
+    [SerializeField] private float attackCooldown = 0.5f;
     [SerializeField] private Attack attackPrefab;
 
     [SerializeField] private CircleCollider2D FieldOfView;
@@ -24,11 +24,31 @@ public class EnemyGeneral : MonoBehaviour
     public Attack AttackPrefab => attackPrefab;
 
     //================================//
+    private bool coolDownOver = true;
+    private float attackCooldownTimer = 0f;
+    //================================//
     void Start()
     {
         // Initialize the enemy
         FieldOfView = GetComponent<CircleCollider2D>();
         FieldOfView.radius = detectRange;
+    }
+
+    //================================//
+    void Update()
+    {
+        //manage cooldown
+        if (attackCooldownTimer > 0)
+        {
+            attackCooldownTimer -= Time.deltaTime;
+        }
+        else
+        {
+            attackCooldownTimer = 0;
+            coolDownOver = true;
+        }
+
+
     }
 
     //================================//
@@ -44,7 +64,6 @@ public class EnemyGeneral : MonoBehaviour
     //================================//
     private void Die()
     {
-        // Handle enemy death logic here
         Debug.Log(this.gameObject.name + " has died!");
         Destroy(gameObject);
     }
@@ -52,11 +71,16 @@ public class EnemyGeneral : MonoBehaviour
     // ================================//
     private void Attack(Vector2 targetPosition)
     {
-        // Handle attack logic here
-        Debug.Log(this.gameObject.name + " attacks!");
+
+        //Raycast to check if the attack hits an obstacle
+
         // pose COLLISION object on detected location
-        Attack attack = Instantiate(attackPrefab, transform.position, Quaternion.identity);
-        attack.transform.position = transform.position;
+        //add child attack object to the enemy
+        Attack attack = Instantiate(attackPrefab, this.transform.position, Quaternion.identity);
+        attack.SetDestination(targetPosition);
+
+        attackCooldownTimer = attackCooldown;
+        coolDownOver = false;
 
     }
 
@@ -72,7 +96,7 @@ public class EnemyGeneral : MonoBehaviour
 
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-        if (distanceToTarget <= attackRange - 1.0f)
+        if (distanceToTarget <= attackRange - 0.5f)
         {
             Debug.Log("Enemy close to player, not moving");
             return;
@@ -102,11 +126,12 @@ public class EnemyGeneral : MonoBehaviour
 
             float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
-            if (distanceToPlayer <= detectRange)
+            if (distanceToPlayer <= detectRange && coolDownOver)
             {
                 // Attack the player
                 Debug.Log("Enemy attacks player");
-                // Attack(playerPosition);
+                Attack(playerPosition);
+
             }
             else
             {

@@ -4,29 +4,50 @@ public class Attack : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private int damage = 10;
-    [SerializeField] private float lifetime = 10000.0f;
+    [SerializeField] private float lifetime = 1.0f;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float size = 0.5f;
 
     //================================//
     public int Damage => damage;
+    public float Lifetime => lifetime;
+    public float Size => size;
+    public float Speed => speed;
+    //================================//
+
+    private Vector2 destinationPosition;
     //================================//
     void Start()
     {
+        // Set the size of the attack object
+        transform.localScale = new Vector3(size, size, 1f);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Move the attack object towards the destination position
+        transform.position = Vector2.MoveTowards(transform.position, destinationPosition, speed * Time.deltaTime);
         //destroy the attack object after a certain time
-        lifetime -= Time.deltaTime;
-        if (lifetime <= 0)
+        if (Vector2.Distance(transform.position, destinationPosition) < 0.01f)
         {
-            Destroy(gameObject);
-        }
 
+
+            lifetime -= Time.deltaTime;
+            if (lifetime <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
-
+    //================================//
+    // Set the destination position for the attack object
+    public void SetDestination(Vector2 destination)
+    {
+        destinationPosition = destination;
+    }
 
     //================================//
     //on trigger
