@@ -10,9 +10,8 @@ public class Spell: MonoBehaviour
     //================================//
     public enum eSpellType
     {
-        Electric,
-        Fire,
-        Ice,
+        Electric = 0,
+        Wave = 1,
     }
 
     //================================//

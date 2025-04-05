@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private InputSystem_Actions         inputActions;
     private Vector2                     movementInput;
     private bool                        isSprinting = false;
+    private int                         castSpellType = 0;
 
     //controll the number of electric follow spells
     [SerializeField] private int        maxElectricSpells = 1;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Sprint.performed += OnSprint;
         inputActions.Player.Sprint.canceled += OnSprint;
         inputActions.Player.Attack.performed += OnAttack;
+        inputActions.Player.SwitchSpell.performed += OnSwitchSpell;
 
         Spell.onSpellSpawn += OnSpellPerformed;
         Spell.onSpellDie += OnSpellExpired;
@@ -46,7 +48,12 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Sprint.performed -= OnSprint;
         inputActions.Player.Sprint.canceled -= OnSprint;
         inputActions.Player.Attack.performed -= OnAttack;
+        inputActions.Player.SwitchSpell.performed -= OnSwitchSpell;
         inputActions.Player.Disable();
+
+        Spell.onSpellSpawn -= OnSpellPerformed;
+        Spell.onSpellDie -= OnSpellExpired;
+        Spell.onSpellHit -= OnAttackHit;
     }
 
     //================================//
@@ -137,12 +144,27 @@ public class PlayerController : MonoBehaviour
     }
 
     //================================//
+    private void OnSwitchSpell(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            castSpellType = (castSpellType + 1) % System.Enum.GetValues(typeof(Spell.eSpellType)).Length;
+        }
+    }
+
+    //================================//
     private void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && currentElectricSpells < maxElectricSpells)
+        if (! (context.performed && currentElectricSpells < maxElectricSpells)) return;
+        switch (castSpellType)
         {
-            Instantiate(PrefabManager.Instance.ElectricSpell, transform.position, Quaternion.identity);
-            currentElectricSpells++;
+            case (int)Spell.eSpellType.Electric:
+                Instantiate(PrefabManager.Instance.ElectricSpell, transform.position, Quaternion.identity);
+                currentElectricSpells++;
+                break;
+            case (int)Spell.eSpellType.Wave:
+                Instantiate(PrefabManager.Instance.WaveSpell, transform.position, Quaternion.identity);
+                break;
         }
     }
 
