@@ -44,10 +44,7 @@ public class Attack : MonoBehaviour
             // Destroy the attack object after dealing damage
             Destroy(gameObject);
         }
-        else
-        {
-            Debug.Log("Attack collided with " + collision.gameObject.name + " but did not deal damage.");
-        }
+
     }
 
 }
