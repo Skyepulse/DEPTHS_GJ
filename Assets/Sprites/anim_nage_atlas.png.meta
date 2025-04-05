@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b177bfdeab65b68ba94a086770791b95
+guid: 689da2c450bcdd64da0eb8d17814207b
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      anim_nage_atlas_0: 4734989952496239411
+      anim_nage_atlas_1: 1854530739885283120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

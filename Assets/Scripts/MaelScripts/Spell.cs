@@ -3,8 +3,9 @@ using UnityEngine.Events;
 
 public class Spell: MonoBehaviour
 {
-    public UnityAction<Spell> onSpellHit;
-    public UnityAction<Spell> onSpellSpawn;
+    public static UnityAction<Spell> onSpellHit;
+    public static UnityAction<Spell> onSpellSpawn;
+    public static UnityAction<Spell> onSpellDie;
 
     //================================//
     public enum eSpellType
@@ -22,7 +23,7 @@ public class Spell: MonoBehaviour
     protected float             spellDuration;
 
     //================================//
-    private float               lifeTimer = 0f;
+    protected float             lifeTimer = 0f;
     //================================//
     public eSpellType       SpellType     => spellType;
     public int              SpellDamage   => spellDamage;
@@ -35,12 +36,17 @@ public class Spell: MonoBehaviour
         if (spellCollider == null)
         {
             Debug.LogError("Spell collider is not assigned or missing!");
-            Destroy(this.gameObject);
+            Die();
         }
+
+        // deactivate collider at start
+        spellCollider.enabled = false;
+
+        OnSpawn();
     }
 
     //================================//
-    protected void Update()
+    protected virtual void Update()
     {
         if (lifeTimer > 0f)
         {
@@ -48,7 +54,8 @@ public class Spell: MonoBehaviour
             if (lifeTimer <= 0f)
             {
                 Debug.Log("Spell has expired!");
-                Destroy(this.gameObject);
+                Die();
+                return;
             }
         }
     }
@@ -64,13 +71,19 @@ public class Spell: MonoBehaviour
     {
         onSpellSpawn?.Invoke(spellSpawn);
     }
+
+    //================================//
+    protected void OnSpellDie(Spell spellDie)
+    {
+        onSpellDie?.Invoke(spellDie);
+    }
     
     //================================//
     public virtual void OnHit()
     {
         // Handle the spell hit logic here
         OnSpellHit(this);
-        Destroy(this.gameObject);
+        Die();
     }
 
     //================================//
@@ -82,16 +95,27 @@ public class Spell: MonoBehaviour
     }
 
     //================================//
-    protected void OnCollisionEnter2D(Collision2D collision)
+    public void Die()
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        // Handle the spell death logic here
+        Debug.Log("Spell has died!");
+        OnSpellDie(this);
+        Destroy(this.gameObject);
+    }
+
+    //================================//
+    protected void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Spell collided with: " + other.gameObject.name);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             OnHit();
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(spellDamage);
-            } else 
+            }
+            else
             {
                 Debug.LogError("Enemy component is missing on the collided object!");
             }

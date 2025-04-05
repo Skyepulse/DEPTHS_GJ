@@ -14,8 +14,6 @@ public class ElectricSpell: Spell
         this.spellDamage = (int)spellDamageVal;
         this.spellCost = (int)spellCostVal;
         this.spellDuration = spellDurationVal;
-
-        OnSpawn();
     }
 
     //================================//
@@ -27,16 +25,34 @@ public class ElectricSpell: Spell
     }
 
     //================================//
+    protected override void Update()
+    {
+        base.Update();
+
+        // Update the position of the spell to follow the mouse cursor with a small delay
+        if (lifeTimer > 0f && spellCollider.enabled)
+        {
+            Vector2 mousePos = GetMousePosition();
+            transform.position = Vector2.Lerp(transform.position, mousePos, Time.deltaTime * 10f);
+        }
+    }
+
+    //================================//
     public override void OnSpawn()
     {
         base.OnSpawn();
         // Handle the electric spell spawn logic here
         Debug.Log("Electric spell spawned! Cost: " + spellCost);
+
+        // activate collider
+        spellCollider.enabled = true;
     }
 
     //================================//
-    private void InitializePosition()
+    private Vector2 GetMousePosition()
     {
-        // get mouse position and set the position of the spell to the mouse position
+        // get mouse position in world space
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return mousePos;
     }
 }
