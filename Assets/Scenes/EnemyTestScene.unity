@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 1305361207}
   - component: {fileID: 1305361206}
   - component: {fileID: 1305361210}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Attack
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -400,7 +400,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -413,7 +413,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -497,8 +497,8 @@ Transform:
   m_GameObject: {fileID: 1305361205}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.23, y: -0.16, z: 0}
+  m_LocalScale: {x: 2.3783932, y: 2.188468, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -515,6 +515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76932f93dbd0c3bb1b8757cfb69da576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  lifetime: 0.2
 --- !u!1 &1788814413
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +596,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   sprintMult: 2.5
+  maxHealth: 100
+  maxMana: 100
+  maxElectricSpells: 1
 --- !u!50 &1788814416
 Rigidbody2D:
   serializedVersion: 5
@@ -756,6 +761,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c401fc4a1ff8d5e7ab960ead27039840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 10
+  damage: 10
+  speed: 5
+  attackRange: 1.5
+  detectRange: 6
+  attackCooldown: 1
+  attackPrefab: {fileID: 0}
 --- !u!70 &2048958833
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

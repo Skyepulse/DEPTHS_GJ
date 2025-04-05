@@ -7,7 +7,7 @@ public class EnemyGeneral : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float attackRange = 1.5f;
 
-    [SerializeField] private float detectRange = 6.f;
+    [SerializeField] private float detectRange = 6.0f;
 
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private Attack attackPrefab;
