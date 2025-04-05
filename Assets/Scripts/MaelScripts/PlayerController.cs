@@ -7,8 +7,11 @@ public class PlayerController : MonoBehaviour
     // Has collisions
     [SerializeField] private float      speed = 2f;
     [SerializeField] private float      sprintMult = 2.5f;
-    [SerializeField] private int        maxHealth = 100;
-    [SerializeField] private int        maxMana = 100;
+    [SerializeField] private float        maxHealth = 100;
+    [SerializeField] private float        maxMana = 100;
+    [SerializeField] private float        manaRefillRate = 1; // per second
+    [SerializeField] private ValueBar   healthBar;
+    [SerializeField] private ValueBar   manaBar;
     private Rigidbody2D                 rb;
     private InputSystem_Actions         inputActions;
     private Vector2                     movementInput;
@@ -17,8 +20,8 @@ public class PlayerController : MonoBehaviour
     //controll the number of electric follow spells
     [SerializeField] private int        maxElectricSpells = 1;
     private int                         currentElectricSpells = 0;
-    private int                         currentMana;
-    private int                         currentHealth;
+    private float                         currentMana;
+    private float                         currentHealth;
 
     //================================//
     private void OnEnable()
@@ -65,6 +68,17 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.linearVelocity = movementInput.normalized * speed;
+        healthBar.Value = (float)currentHealth / maxHealth;
+        manaBar.Value = (float)currentMana / maxMana;
+
+        if (currentMana < maxMana)
+        {
+            currentMana += manaRefillRate * Time.fixedDeltaTime;
+            if (currentMana > maxMana)
+            {
+                currentMana = maxMana;
+            }
+        }
     }
 
     //================================//

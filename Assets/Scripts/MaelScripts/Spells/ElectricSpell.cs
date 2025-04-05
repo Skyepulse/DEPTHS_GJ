@@ -20,8 +20,6 @@ public class ElectricSpell: Spell
     public override void OnHit()
     {
         base.OnHit();
-        // Handle the electric spell hit logic here
-        Debug.Log("Electric spell hit! Damage: " + spellDamage);
     }
 
     //================================//
@@ -41,8 +39,6 @@ public class ElectricSpell: Spell
     public override void OnSpawn()
     {
         base.OnSpawn();
-        // Handle the electric spell spawn logic here
-        Debug.Log("Electric spell spawned! Cost: " + spellCost);
 
         // activate collider
         spellCollider.enabled = true;
