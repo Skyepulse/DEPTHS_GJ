@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      anim_nage_atlas_0: 4734989952496239411
+      anim_nage_atlas_1: 1854530739885283120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
