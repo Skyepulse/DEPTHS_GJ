@@ -65,10 +65,10 @@ public class EnemyGeneral : MonoBehaviour
         Debug.Log("moving to player position");
         // rotate towards the target position
 
+
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
 
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
