@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5316239403498633324}
   - component: {fileID: 5941822006707299848}
   - component: {fileID: 4452361927507788632}
+  - component: {fileID: 8478994518790428964}
   m_Layer: 0
   m_Name: Room02
   m_TagString: Untagged
@@ -599,3 +600,24 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &8478994518790428964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805149704352303959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30f91cc3a25f1245a3fa85a0019048d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doors:
+  - position: {x: 2, y: 2, z: 0}
+    direction: 1
+  - position: {x: -9, y: -2, z: 0}
+    direction: 3
+  - position: {x: -3, y: 4, z: 0}
+    direction: 0
+  - position: {x: -6, y: -4, z: 0}
+    direction: 2

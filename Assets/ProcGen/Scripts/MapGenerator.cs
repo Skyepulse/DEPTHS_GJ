@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -6,13 +7,11 @@ public class MapGenerator : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] roomPrefabs;
+
     [SerializeField]
     private int numRooms = 5;
 
-    [SerializeField]
-    private string doorTileName = "tileset_4";
-
-    enum Direction
+    public enum Direction
     {
         North,
         East,
@@ -21,76 +20,33 @@ public class MapGenerator : MonoBehaviour
         None
     }
 
-    private Vector3Int getDoorPosition(Tilemap tilemap, Direction direction)
+    struct RoomNode
     {
-        Vector3Int position = Vector3Int.zero;
-        BoundsInt bounds = tilemap.cellBounds;
+        public GameObject room;
+        public Room.Door doorIn;
+        public Room.Door doorOut;
+    }
 
-        switch (direction)
+    private List<Room.Door> getDoorPositions(Room room, Direction direction)
+    {
+        List<Room.Door> doors = new List<Room.Door>();
+
+        foreach (var door in room.doors)
         {
-            case Direction.North:
-                for (position.y = bounds.yMax - 1; position.y >= bounds.y; position.y--)
-                {
-                    for (position.x = bounds.x; position.x < bounds.xMax; position.x++)
-                    {
-                        TileBase tile = tilemap.GetTile(position);
-                        if (tile != null && tile.name.Contains(doorTileName))
-                        {
-                            return position;
-                        }
-                    }
-                }
-                break;
-
-            case Direction.South:
-                for (position.y = bounds.y; position.y < bounds.yMax; position.y++)
-                {
-                    for (position.x = bounds.x; position.x < bounds.xMax; position.x++)
-                    {
-                        TileBase tile = tilemap.GetTile(position);
-                        if (tile != null && tile.name.Contains(doorTileName))
-                        {
-                            return position;
-                        }
-                    }
-                }
-                break;
-
-            case Direction.East:
-                for (position.x = bounds.xMax - 1; position.x >= bounds.x; position.x--)
-                {
-                    for (position.y = bounds.y; position.y < bounds.yMax; position.y++)
-                    {
-                        TileBase tile = tilemap.GetTile(position);
-                        if (tile != null && tile.name.Contains(doorTileName))
-                        {
-                            return position;
-                        }
-                    }
-                }
-                break;
-
-            case Direction.West:
-                for (position.x = bounds.x; position.x < bounds.xMax; position.x++)
-                {
-                    for (position.y = bounds.y; position.y < bounds.yMax; position.y++)
-                    {
-                        TileBase tile = tilemap.GetTile(position);
-                        if (tile != null && tile.name.Contains(doorTileName))
-                        {
-                            return position;
-                        }
-                    }
-                }
-                break;
+            if (door.direction == direction)
+            {
+                doors.Add(door);
+            }
         }
 
-        Debug.LogWarning("No door tile found in the specified direction.");
-        return Vector3Int.zero;
+        return doors;
     }
 
     private Direction getOppositeDirection(Direction direction)
     {
+        if (direction == Direction.None)
+            return Direction.None;
+
         return (Direction)(((int)direction + 2) % 4);
     }
 
@@ -113,7 +69,7 @@ public class MapGenerator : MonoBehaviour
             {
                 Vector3Int localPosition = new(x, y, 0);
                 TileBase tile = tilemap.GetTile(localPosition);
-                if (tile != null && tile.name.Contains(doorTileName))
+                if (tile != null)
                 {
                     min.x = Mathf.Min(min.x, x);
                     min.y = Mathf.Min(min.y, y);
@@ -140,13 +96,14 @@ public class MapGenerator : MonoBehaviour
         GameObject firstRoom = Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], Vector3.zero, Quaternion.identity);
         firstRoom.transform.SetParent(transform);
 
-        GameObject[] rooms = new GameObject[numRooms];
-        rooms[0] = firstRoom; // Store the first room
-        Direction[] roomDirections = new Direction[numRooms];
-        roomDirections[0] = Direction.None; // First room has no direction
-
-        GameObject lastRoom = firstRoom;
-        Direction lastRoomDirection = Direction.None;
+        RoomNode[] roomNodes = new RoomNode[numRooms];
+        roomNodes[0].room = firstRoom;
+        roomNodes[0].doorIn = new Room.Door
+        {
+            position = Vector3Int.zero,
+            direction = Direction.None,
+            room = firstRoom.GetComponent<Room>()
+        };
 
         string generationSteps = "";
 
@@ -158,45 +115,57 @@ public class MapGenerator : MonoBehaviour
             while (!roomFound && attempts < 30)
             {
                 attempts++;
-                // Randomly select a room prefab
-                GameObject roomPrefab = roomPrefabs[Random.Range(0, roomPrefabs.Length)];
 
-                Tilemap tilemap = roomPrefab.GetComponentInChildren<Tilemap>();
-                if (tilemap == null)
+                List<Room.Door> newRoomDoorCandidates = new List<Room.Door>();
+                foreach (var door in roomNodes[i - 1].room.GetComponent<Room>().doors)
                 {
-                    Debug.LogWarning("No Tilemap found in the room prefab: " + roomPrefab.name);
-                    return;
+                    if (door.direction != roomNodes[i - 1].doorOut.direction)
+                    {
+                        Room.Door modifiedDoor = door;
+                        modifiedDoor.room = roomNodes[i - 1].room.GetComponent<Room>();
+                        newRoomDoorCandidates.Add(modifiedDoor);
+                    }
                 }
+                roomNodes[i - 1].doorOut = newRoomDoorCandidates[Random.Range(0, newRoomDoorCandidates.Count)];
 
-                // Random room direction that isn't the same as the last room's direction
-                Direction roomDirection;
-                if (lastRoomDirection == Direction.None) roomDirection = (Direction)Random.Range(0, 4);
-                else roomDirection = (Direction)(((int)lastRoomDirection + Random.Range(1, 4)) % 4);
+                Direction roomDirection = getOppositeDirection(roomNodes[i - 1].doorOut.direction);
 
                 generationSteps += roomDirection.ToString() + " -> ";
 
-                BoundsInt bounds = tilemap.cellBounds;
+                List<Room.Door> candidateDoors = new List<Room.Door>();
+                foreach (GameObject roomPrefab in roomPrefabs)
+                {
+                    List<Room.Door> roomDoors = getDoorPositions(roomPrefab.GetComponent<Room>(), roomDirection);
 
-                // Find the last room's door position
-                Tilemap lastRoomTilemap = lastRoom.GetComponentInChildren<Tilemap>();
-                Vector3Int lastRoomDoorPosition = getDoorPosition(lastRoomTilemap, roomDirection);
+                    foreach (var door in roomDoors)
+                        if (door.direction == roomDirection)
+                        {
+                            Room.Door modifiedDoor = door;
+                            modifiedDoor.room = roomPrefab.GetComponent<Room>();
+                            candidateDoors.Add(modifiedDoor);
+                        }
+                }
+                if (candidateDoors.Count == 0)
+                {
+                    Debug.LogWarning("No candidate doors found for direction: " + roomDirection);
+                    break;
+                }
 
-                // Get the door position of the room prefab
-                Vector3Int doorPosition = getDoorPosition(tilemap, getOppositeDirection(roomDirection));
+                Room.Door newDoorIn = candidateDoors[Random.Range(0, candidateDoors.Count)];
 
                 // The offset to spawn the new room
-                Vector3 offset = new(lastRoomDoorPosition.x - doorPosition.x, lastRoomDoorPosition.y - doorPosition.y, 0);
+                Vector3 offset = new(roomNodes[i - 1].doorOut.position.x - newDoorIn.position.x, roomNodes[i - 1].doorOut.position.y - newDoorIn.position.y, 0);
 
-                Vector3 spawnPosition = lastRoom.transform.position + offset; // Calculate the spawn position
+                Vector3 spawnPosition = roomNodes[i - 1].room.transform.position + offset; // Calculate the spawn position
 
                 roomFound = true;
                 // Check intersection with previously placed rooms
                 for (int j = 0; j < i - 1; j++)
                 {
-                    BoundsInt roomBounds = getRoomBounds(rooms[j]);
-                    BoundsInt newRoomBounds = getRoomBounds(roomPrefab);
+                    BoundsInt roomBounds = getRoomBounds(roomNodes[j].room);
+                    BoundsInt newRoomBounds = getRoomBounds(newDoorIn.room.GetPrefab());
                     newRoomBounds.position += Vector3Int.FloorToInt(spawnPosition);
-                    roomBounds.position += Vector3Int.FloorToInt(rooms[j].transform.position);
+                    roomBounds.position += Vector3Int.FloorToInt(roomNodes[j].room.transform.position);
 
                     if (Intersects(roomBounds, newRoomBounds))
                     {
@@ -207,13 +176,14 @@ public class MapGenerator : MonoBehaviour
                 if (!roomFound) continue;
 
                 // Instantiate the new room prefab at the calculated position
-                GameObject room = Instantiate(roomPrefab, spawnPosition, Quaternion.identity);
+                GameObject room = Instantiate(newDoorIn.room.GetPrefab(), spawnPosition, Quaternion.identity);
                 room.transform.SetParent(transform);
 
-                lastRoom = room;
-                lastRoomDirection = getOppositeDirection(roomDirection);
-                rooms[i] = room; // Store the new room
-                roomDirections[i] = roomDirection; // Store the direction of the new room
+                roomNodes[i] = new RoomNode
+                {
+                    room = room,
+                    doorIn = newDoorIn
+                };
             }
 
             if (!roomFound) return;
@@ -223,27 +193,21 @@ public class MapGenerator : MonoBehaviour
 
         for (int i = 0; i < numRooms; i++)
         {
-            Tilemap tilemap = rooms[i].GetComponentInChildren<Tilemap>();
+            Tilemap tilemap = roomNodes[i].room.GetComponentInChildren<Tilemap>();
             if (tilemap == null)
             {
-                Debug.LogWarning("No Tilemap found in the room prefab: " + rooms[i].name);
+                Debug.LogWarning("No Tilemap found in the room prefab: " + roomNodes[i].room.name);
                 continue;
             }
 
-            Direction roomDirection = roomDirections[i];
-            Vector3Int doorPosition = getDoorPosition(tilemap, getOppositeDirection(roomDirection));
-
-            BoundsInt bounds = tilemap.cellBounds;
-            for (int x = bounds.x; x < bounds.xMax; x++)
+            foreach (var door in roomNodes[i].room.GetComponent<Room>().doors)
             {
-                for (int y = bounds.y; y < bounds.yMax; y++)
+                if (door.position != roomNodes[i].doorOut.position)
                 {
-                    Vector3Int localPosition = new(x, y, 0);
+                    Vector3Int localPosition = new Vector3Int(door.position.x, door.position.y, 0);
                     TileBase tile = tilemap.GetTile(localPosition);
-                    if (tile != null && tile.name.Contains(doorTileName) && localPosition != doorPosition)
-                    {
-                        tilemap.SetTile(localPosition, null); // Remove the door tile
-                    }
+                    tilemap.SetTile(localPosition, null); // Remove the door tile
+
                 }
             }
         }
