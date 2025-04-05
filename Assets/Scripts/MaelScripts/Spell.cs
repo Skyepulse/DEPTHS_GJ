@@ -53,7 +53,6 @@ public class Spell: MonoBehaviour
             lifeTimer -= Time.deltaTime;
             if (lifeTimer <= 0f)
             {
-                Debug.Log("Spell has expired!");
                 Die();
                 return;
             }
@@ -98,19 +97,17 @@ public class Spell: MonoBehaviour
     public void Die()
     {
         // Handle the spell death logic here
-        Debug.Log("Spell has died!");
         OnSpellDie(this);
         Destroy(this.gameObject);
     }
 
     //================================//
-    protected void OnTriggerEnter2D(Collider2D other)
+    protected void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("Spell collided with: " + other.gameObject.name);
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             OnHit();
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            Enemy enemy = collider.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(spellDamage);
@@ -119,6 +116,9 @@ public class Spell: MonoBehaviour
             {
                 Debug.LogError("Enemy component is missing on the collided object!");
             }
+        } else if (collider.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            Die();
         }
     }
 }
