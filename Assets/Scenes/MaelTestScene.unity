@@ -1026,6 +1026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   electricSpellPrefab: {fileID: 7803615698866579609, guid: 1fbd849a5b4d47c4aa0e75ea0dfe6b7c, type: 3}
+  waveSpellPrefab: {fileID: 7803615698866579609, guid: d59a63636fb514045aa2199e4bf2349c, type: 3}
 --- !u!1 &1902930521
 GameObject:
   m_ObjectHideFlags: 0

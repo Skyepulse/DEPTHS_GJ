@@ -8,9 +8,11 @@ public class PrefabManager : MonoBehaviour
 
     //================================//
     [SerializeField] private GameObject         electricSpellPrefab;
+    [SerializeField] private GameObject         waveSpellPrefab;
 
     //================================//
-    public GameObject                           ElectricSpell => electricSpellPrefab ?? throw new System.NullReferenceException("Electric spell prefab is not assigned!");
+    public GameObject                           ElectricSpell   => electricSpellPrefab ?? throw new System.NullReferenceException("Electric spell prefab is not assigned!");
+    public GameObject                           WaveSpell       => waveSpellPrefab ?? throw new System.NullReferenceException("Wave spell prefab is not assigned!");
 
     //================================//
     private void Awake()
