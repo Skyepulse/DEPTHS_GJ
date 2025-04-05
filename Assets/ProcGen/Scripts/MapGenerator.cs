@@ -27,9 +27,9 @@ public class MapGenerator : MonoBehaviour
         public Room.Door doorOut;
     }
 
-    private List<Room.Door> getDoorPositions(Room room, Direction direction)
+    private List<Room.Door> GetDoorPositions(Room room, Direction direction)
     {
-        List<Room.Door> doors = new List<Room.Door>();
+        List<Room.Door> doors = new();
 
         foreach (var door in room.doors)
         {
@@ -42,7 +42,7 @@ public class MapGenerator : MonoBehaviour
         return doors;
     }
 
-    private Direction getOppositeDirection(Direction direction)
+    private Direction GetOppositeDirection(Direction direction)
     {
         if (direction == Direction.None)
             return Direction.None;
@@ -50,7 +50,7 @@ public class MapGenerator : MonoBehaviour
         return (Direction)(((int)direction + 2) % 4);
     }
 
-    private BoundsInt getRoomBounds(GameObject room)
+    private BoundsInt GetRoomBounds(GameObject room)
     {
         Tilemap tilemap = room.GetComponentInChildren<Tilemap>();
         if (tilemap == null)
@@ -116,7 +116,7 @@ public class MapGenerator : MonoBehaviour
             {
                 attempts++;
 
-                List<Room.Door> newRoomDoorCandidates = new List<Room.Door>();
+                List<Room.Door> newRoomDoorCandidates = new();
                 foreach (var door in roomNodes[i - 1].room.GetComponent<Room>().doors)
                 {
                     if (door.direction != roomNodes[i - 1].doorOut.direction)
@@ -128,14 +128,14 @@ public class MapGenerator : MonoBehaviour
                 }
                 roomNodes[i - 1].doorOut = newRoomDoorCandidates[Random.Range(0, newRoomDoorCandidates.Count)];
 
-                Direction roomDirection = getOppositeDirection(roomNodes[i - 1].doorOut.direction);
+                Direction roomDirection = GetOppositeDirection(roomNodes[i - 1].doorOut.direction);
 
                 generationSteps += roomDirection.ToString() + " -> ";
 
-                List<Room.Door> candidateDoors = new List<Room.Door>();
+                List<Room.Door> candidateDoors = new();
                 foreach (GameObject roomPrefab in roomPrefabs)
                 {
-                    List<Room.Door> roomDoors = getDoorPositions(roomPrefab.GetComponent<Room>(), roomDirection);
+                    List<Room.Door> roomDoors = GetDoorPositions(roomPrefab.GetComponent<Room>(), roomDirection);
 
                     foreach (var door in roomDoors)
                         if (door.direction == roomDirection)
@@ -162,8 +162,8 @@ public class MapGenerator : MonoBehaviour
                 // Check intersection with previously placed rooms
                 for (int j = 0; j < i - 1; j++)
                 {
-                    BoundsInt roomBounds = getRoomBounds(roomNodes[j].room);
-                    BoundsInt newRoomBounds = getRoomBounds(newDoorIn.room.GetPrefab());
+                    BoundsInt roomBounds = GetRoomBounds(roomNodes[j].room);
+                    BoundsInt newRoomBounds = GetRoomBounds(newDoorIn.room.GetPrefab());
                     newRoomBounds.position += Vector3Int.FloorToInt(spawnPosition);
                     roomBounds.position += Vector3Int.FloorToInt(roomNodes[j].room.transform.position);
 
@@ -204,7 +204,7 @@ public class MapGenerator : MonoBehaviour
             {
                 if (door.position != roomNodes[i].doorOut.position)
                 {
-                    Vector3Int localPosition = new Vector3Int(door.position.x, door.position.y, 0);
+                    Vector3Int localPosition = new(door.position.x, door.position.y, 0);
                     TileBase tile = tilemap.GetTile(localPosition);
                     tilemap.SetTile(localPosition, null); // Remove the door tile
 
