@@ -9,6 +9,9 @@ public class WaveSpell: Spell
     [SerializeField] private float          spellCostVal = 2f;
     [SerializeField] private float          speed = 5.0f;
     [SerializeField] private VisualEffect   effect;
+    
+    //Speed curve
+    [SerializeField] private AnimationCurve speedCurve;
 
     private Vector2 direction = new Vector2(0.0f, 0.0f);
 
@@ -32,7 +35,8 @@ public class WaveSpell: Spell
     {
         base.Update();
 
-        transform.position += new Vector3(direction.x, direction.y, 0.0f) * speed * Time.deltaTime;
+        float thisSpeed = speed * speedCurve.Evaluate(this.lifeTimer / this.spellDuration);
+        transform.position += new Vector3(direction.x, direction.y, 0.0f) * thisSpeed * Time.deltaTime;
     }
 
     //================================//

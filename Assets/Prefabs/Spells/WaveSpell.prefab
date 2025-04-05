@@ -227,5 +227,38 @@ MonoBehaviour:
   spellDurationVal: 20
   spellDamageVal: 2
   spellCostVal: 2
-  speed: 5
+  speed: 3.5
   effect: {fileID: 262705266690267415}
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.8755459
+      inSlope: -0.121864945
+      outSlope: -0.121864945
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.3612886
+    - serializedVersion: 3
+      time: 0.7438651
+      value: 1.2848574
+      inSlope: 0.47847888
+      outSlope: 0.47847888
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09388379
+      outWeight: 1
+    - serializedVersion: 3
+      time: 1
+      value: 2.5
+      inSlope: 5.7333717
+      outSlope: 5.7333717
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10624999
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
