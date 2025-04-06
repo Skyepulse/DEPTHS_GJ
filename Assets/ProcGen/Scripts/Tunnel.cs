@@ -7,7 +7,6 @@ public class Tunnel : MonoBehaviour
 
     private bool isOpen = false;
 
-    private MapGenerator.Direction lastDirection = MapGenerator.Direction.None;
     [SerializeField]
     private MapGenerator.Direction direction = MapGenerator.Direction.None;
 
@@ -23,10 +22,7 @@ public class Tunnel : MonoBehaviour
 
     void OnValidate()
     {
-        if (direction != lastDirection)
-        {
-            Direction = direction;
-        }
+        Direction = direction;
     }
 
     public void SetOpen(bool isOpen)
