@@ -86,8 +86,8 @@ public class EnemyBroodmother : Enemy
     private void moveAwayFrom(Vector2 targetPosition)
     {
         Vector2 direction = ((Vector2)transform.position - targetPosition).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         VisualNode.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
         transform.position = Vector2.MoveTowards(transform.position, (Vector2)transform.position - targetPosition, speed * Time.deltaTime);
     }
 

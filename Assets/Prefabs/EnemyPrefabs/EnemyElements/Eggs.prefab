@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1993200023, guid: dcecf731b0791d05abc410b4009b0a6b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   healthBar: {fileID: 0}
-  hatchTime: 2
+  hatchTime: 5
   minionPrefab: {fileID: 495430811237273139, guid: 247307df82e3bae52ba87163c8ddeb36, type: 3}
   hatchEffect: {fileID: 6069308252051057241, guid: 83c0af3ec9808274eb19d06255bfe583, type: 3}
 --- !u!50 &6120377658318598225
