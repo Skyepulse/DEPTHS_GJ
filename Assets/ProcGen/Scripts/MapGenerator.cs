@@ -14,6 +14,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private GameObject tunnelPrefab;
 
+    private RoomNode[] roomNodes;
+
     public enum Direction
     {
         North,
@@ -23,7 +25,7 @@ public class MapGenerator : MonoBehaviour
         None
     }
 
-    struct RoomNode
+    public struct RoomNode
     {
         public GameObject room;
         public Room.Door doorIn;
@@ -52,7 +54,7 @@ public class MapGenerator : MonoBehaviour
         GameObject firstRoom = Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], Vector3.zero, Quaternion.identity);
         firstRoom.transform.SetParent(transform);
 
-        RoomNode[] roomNodes = new RoomNode[numRooms];
+        roomNodes = new RoomNode[numRooms];
         roomNodes[0].room = firstRoom;
         roomNodes[0].doorIn = new Room.Door
         {
@@ -198,5 +200,21 @@ public class MapGenerator : MonoBehaviour
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
+    }
+
+    public RoomNode WhichRoom(Vector3 position)
+    {
+        foreach (var roomNode in roomNodes)
+        {
+            if (roomNode.room == null) continue; // Skip if the room is null
+            BoundsInt roomBounds = roomNode.room.GetComponent<Room>().GetBounds();
+            roomBounds.position += Vector3Int.FloorToInt(roomNode.room.transform.position);
+            if (roomBounds.Contains(Vector3Int.FloorToInt(position)))
+            {
+                return roomNode;
+            }
+        }
+
+        return default;
     }
 }
