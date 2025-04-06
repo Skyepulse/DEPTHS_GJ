@@ -34,7 +34,8 @@ public class GameManager : MonoBehaviour
     //================================//
     // Settings
     [Header("Settings")]
-    [SerializeField] private DungeonFloor[] dungeonFloors = null;
+    [SerializeField] private DungeonFloor[]     dungeonFloors = null;
+    [SerializeField] private Material           fullScreenMatReference = null;
 
 
     //================================//
@@ -93,6 +94,9 @@ public class GameManager : MonoBehaviour
     {
         // Cleanup Enemies
         CleanupEnemies();
+
+        // Assign background color
+        fullScreenMatReference.SetColor("_ColorAdd", dungeonFloors[floorLevel].depthColor);
 
         // Create dungeon floor
         int numberOfRooms = dungeonFloors[floorLevel].roomCount;

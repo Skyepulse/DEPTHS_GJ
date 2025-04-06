@@ -173,3 +173,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dungeonFloors: []
+  fullScreenMatReference: {fileID: 2100000, guid: f791d81decc4db94ebccebef7a697f2b, type: 2}
