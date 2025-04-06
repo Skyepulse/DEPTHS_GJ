@@ -26,6 +26,9 @@ public class EnemyGeneral : MonoBehaviour
     //================================//
     private bool coolDownOver = true;
     private float attackCooldownTimer = 0f;
+
+    private Collider2D lastCollision;
+    private bool playerVisible = false;
     //================================//
     void Start()
     {
@@ -48,6 +51,15 @@ public class EnemyGeneral : MonoBehaviour
             coolDownOver = true;
         }
 
+        // Check if the enemy is within the detection range of the player
+        if (playerVisible)
+        {
+            // Check if the player is within the attack range
+            if (lastCollision != null)
+            {
+                DoWhenCollision(lastCollision);
+            }
+        }
 
     }
 
@@ -86,7 +98,6 @@ public class EnemyGeneral : MonoBehaviour
 
     private void moveTo(Vector2 targetPosition)
     {
-        Debug.Log("moving to player position");
         // rotate towards the target position
 
 
@@ -98,7 +109,6 @@ public class EnemyGeneral : MonoBehaviour
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
         if (distanceToTarget <= attackRange - 0.5f)
         {
-            Debug.Log("Enemy close to player, not moving");
             return;
         }
 
@@ -115,10 +125,8 @@ public class EnemyGeneral : MonoBehaviour
     {
         // Check if the collided object has the PlayerController component
         PlayerController player = collision.GetComponent<PlayerController>();
-        Debug.Log("Enemy spotted with: " + collision.gameObject.name);
         if (player != null)
         {
-            Debug.Log("Player spotted");
             //get player position
             Vector2 playerPosition = player.transform.position;
             //check if player is in range
@@ -129,27 +137,30 @@ public class EnemyGeneral : MonoBehaviour
             if (distanceToPlayer <= detectRange && coolDownOver)
             {
                 // Attack the player
-                Debug.Log("Enemy attacks player");
                 Attack(playerPosition);
 
             }
-            else
-            {
-                Debug.Log("Player out of range");
-            }
+
 
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        DoWhenCollision(collision);
+        lastCollision = collision;
+        playerVisible = true;
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        DoWhenCollision(collision);
+        lastCollision = collision;
+        playerVisible = true;
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        playerVisible = false;
+        lastCollision = null;
+    }
 }
 
 

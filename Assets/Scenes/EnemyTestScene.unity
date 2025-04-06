@@ -891,7 +891,7 @@ MonoBehaviour:
   damage: 10
   speed: 1
   attackRange: 1.5
-  detectRange: 6
+  detectRange: 4.5
   attackCooldown: 4
   attackPrefab: {fileID: 5804064736283882879, guid: ffa625baa3413c80f84b63e8363150f2, type: 3}
   FieldOfView: {fileID: 2048958838}

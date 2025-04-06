@@ -119,12 +119,12 @@ TextureImporter:
       name: anim_nage_atlas_0
       rect:
         serializedVersion: 2
-        x: 10
+        x: 5
         y: 0
-        width: 26
+        width: 34
         height: 49
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,7 +146,7 @@ TextureImporter:
         width: 40
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -159,11 +159,99 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: anim_nage_atlas_2
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 0
+        width: 35
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40ab8625187a20849951ae0e7a4bed73
+      internalID: 1547079855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_nage_atlas_3
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 0
+        width: 42
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bb1310ed27bd0046ad7a5d830c23971
+      internalID: 1151752116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_nage_atlas_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 37
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c761c4d8c1377f4b91d149c4499f3cc
+      internalID: -634647149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: anim_nage_atlas_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 34
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5a16128396951843a7d298d250eafd1
+      internalID: 132474069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a60454dd03c6c834b9f5812bbfc2a4d4
     internalID: 0
     vertices: []
     indices: 
@@ -175,6 +263,10 @@ TextureImporter:
     nameFileIdTable:
       anim_nage_atlas_0: 4734989952496239411
       anim_nage_atlas_1: 1854530739885283120
+      anim_nage_atlas_2: 1547079855
+      anim_nage_atlas_3: 1151752116
+      anim_nage_atlas_4: -634647149
+      anim_nage_atlas_5: 132474069
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
