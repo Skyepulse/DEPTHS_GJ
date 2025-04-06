@@ -204,7 +204,6 @@ public class PlayerController : MonoBehaviour
     //================================//
     private void OnAttackHit(Spell spellHit)
     {
-        TakeDamage(spellHit.SpellDamage);
     }
 
     //================================//
