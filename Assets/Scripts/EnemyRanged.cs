@@ -93,7 +93,7 @@ public class EnemyRanged : Enemy
 
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-        if (distanceToTarget <= attackRangeMin / 2.0f)
+        if (distanceToTarget <= attackRangeMax)
         {
             return;
         }
