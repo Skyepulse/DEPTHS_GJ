@@ -169,25 +169,31 @@ private static MapGenerator _instance;
             for (int j = 0; j < doors.Count; j++)
             {
                 Room.Door door = doors[j];
+                if (roomNodes[i].doorIn.position == door.position) continue; // Skip if the door is the same as the doorIn
 
-                if (roomNodes[i].doorOut == null || door.position != roomNodes[i].doorOut.position)
+                Vector3 localPosition = new Vector3(door.position.x, door.position.y, 0) + roomNodes[i].room.transform.position;
+                Vector3Int spawnPosition = Vector3Int.FloorToInt(localPosition);
+                GameObject tunnel = Instantiate(tunnelPrefab, spawnPosition, Quaternion.identity);
+                tunnel.transform.SetParent(transform);
+                
+                if (tunnel.TryGetComponent<Tunnel>(out var tunnelComponent))
                 {
-                    Vector3 localPosition = new Vector3(door.position.x, door.position.y, 0) + roomNodes[i].room.transform.position;
-                    Vector3Int spawnPosition = Vector3Int.FloorToInt(localPosition);
-                    GameObject tunnel = Instantiate(tunnelPrefab, spawnPosition, Quaternion.identity);
-                    tunnel.transform.SetParent(transform);
-                    if (tunnel.TryGetComponent<Tunnel>(out var tunnelComponent))
-                    {
-                        tunnelComponent.Direction = door.direction;
-                        tunnelComponent.SetOpen(false);
-                        door.tunnel = tunnelComponent;
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Tunnel component not found on the tunnel prefab: " + tunnelPrefab.name);
-                    }
+                    tunnelComponent.Direction = door.direction;
+                    tunnelComponent.SetState((roomNodes[i].doorOut?.position == door.position) ? Tunnel.State.Closed : Tunnel.State.Wall);
+                    door.tunnel = tunnelComponent;
+                }
+                else
+                {
+                    Debug.LogWarning("Tunnel component not found on the tunnel prefab: " + tunnelPrefab.name);
                 }
             }
+        }
+
+        // Set the doorOut tunnel of each room to closed
+        for (int i = 0; i < _numRooms; i++) 
+        {
+            roomNodes[i].doorIn?.tunnel?.SetState(Tunnel.State.Closed);
+            roomNodes[i].doorOut?.tunnel?.SetState(Tunnel.State.Closed);
         }
 
         // Place end trigger in the last room
