@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.04, y: 4.04, z: 4.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6611489422774855198}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -634647149, guid: 689da2c450bcdd64da0eb8d17814207b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -147,8 +147,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0022045162, y: -0.015974015}
-  m_Size: {x: 0.21383828, y: 0.41610092}
+  m_Offset: {x: 0.0022045162, y: -0.13}
+  m_Size: {x: 0.64, y: 1.76}
   m_Direction: 0
 --- !u!1 &2459368729900590824
 GameObject:
@@ -193,7 +193,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2459368729900590824}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   sprintMult: 2.5
-  maxHealth: 100
+  maxHealth: 25
   maxMana: 30
   maxStamina: 50
   manaRefillRate: 1
@@ -261,7 +261,7 @@ Transform:
   m_GameObject: {fileID: 2508079617250161946}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.0180799, z: 0}
+  m_LocalPosition: {x: 0, y: 1.98992, z: 0}
   m_LocalScale: {x: 0.7676, y: 0.7676, z: 0.7676}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -492,8 +492,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4334314210083072042}
-  - {fileID: 239543748965441650}
   - {fileID: 1189889349103765583}
+  - {fileID: 239543748965441650}
   m_Father: {fileID: 334520408178115844}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8860854351631685712
@@ -553,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4049311251827261129, guid: 79011b3e0cf735b4a954a3ae52266490, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2281599
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 4049311251827261129, guid: 79011b3e0cf735b4a954a3ae52266490, type: 3}
       propertyPath: m_LocalPosition.z

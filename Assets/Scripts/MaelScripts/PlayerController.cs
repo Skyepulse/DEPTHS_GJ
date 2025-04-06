@@ -246,8 +246,7 @@ public class PlayerController : MonoBehaviour
     //================================//
     private void Die()
     {
-        // Handle player death logic here
-        Debug.Log("Player has died!");
+        GameManager.Instance.OnPlayerDeath();
         Destroy(gameObject);
     }
 }

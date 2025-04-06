@@ -853,7 +853,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2325,12 +2325,15 @@ MonoBehaviour:
   - position: {x: 12, y: 1, z: 0}
     direction: 1
     room: {fileID: 0}
+    tunnel: {fileID: 0}
   - position: {x: 7, y: -8, z: 0}
     direction: 2
     room: {fileID: 0}
+    tunnel: {fileID: 0}
   - position: {x: -9, y: -1, z: 0}
     direction: 3
     room: {fileID: 0}
+    tunnel: {fileID: 0}
 --- !u!1 &8183987736963420826
 GameObject:
   m_ObjectHideFlags: 0
