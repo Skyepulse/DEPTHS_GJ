@@ -77,16 +77,16 @@ public class PlayerController : MonoBehaviour
         if(VisualNode == null){
             VisualNode = GetComponentInChildren<SpriteAnimator>().gameObject;
         }
-
-        if(PrefabManager.Instance == null){
-            Debug.LogError("PrefabManager instance is not present in the scene!");
-        }
     }
 
     //================================//
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        if(PrefabManager.Instance == null){
+            Debug.LogError("PrefabManager instance is not present in the scene!");
+        }
     }
 
     //================================//
