@@ -14,6 +14,7 @@ public class EnemyRanged : Enemy
     [SerializeField] private Attack attackPrefab;
 
     [SerializeField] private CircleCollider2D FieldOfView;
+    [SerializeField] private GameObject VisualNode;
 
     //================================//
     public int Damage => damage;
@@ -36,6 +37,15 @@ public class EnemyRanged : Enemy
         // Initialize the enemy
         FieldOfView = GetComponent<CircleCollider2D>();
         FieldOfView.radius = detectRange;
+    }
+
+
+    private void Awake()
+    {
+        if (VisualNode == null)
+        {
+            VisualNode = transform.GetChild(0).gameObject;
+        }
     }
 
     //================================//
@@ -89,8 +99,7 @@ public class EnemyRanged : Enemy
 
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
-
+        VisualNode.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
         if (distanceToTarget <= attackRangeMax)
