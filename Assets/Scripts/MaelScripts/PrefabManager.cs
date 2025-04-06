@@ -10,12 +10,16 @@ public class PrefabManager : MonoBehaviour
     [SerializeField] private GameObject         electricSpellPrefab;
     [SerializeField] private GameObject         waveSpellPrefab;
     [SerializeField] private GameObject         playerPrefab;
+    [SerializeField] private GameObject         damageEffectPrefab;
+    [SerializeField] private GameObject         enemydamageEffectPrefab;
 
     //================================//
     public GameObject                           ElectricSpell   => electricSpellPrefab ?? throw new System.NullReferenceException("Electric spell prefab is not assigned!");
     public GameObject                           WaveSpell       => waveSpellPrefab ?? throw new System.NullReferenceException("Wave spell prefab is not assigned!");
     public GameObject                           Player          => playerPrefab ?? throw new System.NullReferenceException("Player prefab is not assigned!");
-
+    public GameObject                           DamageEffect     => damageEffectPrefab ?? throw new System.NullReferenceException("Damage effect prefab is not assigned!");
+    public GameObject                           EnemyDamageEffect => enemydamageEffectPrefab ?? throw new System.NullReferenceException("Enemy damage effect prefab is not assigned!");
+    
     //================================//
     private void Awake()
     {

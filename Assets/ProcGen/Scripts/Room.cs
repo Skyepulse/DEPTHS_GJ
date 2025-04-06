@@ -14,6 +14,7 @@ public class Room : MonoBehaviour
     }
 
     public Door[] doors;
+    public Transform[] spawnPoints;
 
     public GameObject GetPrefab()
     {
@@ -122,6 +123,18 @@ public class Room : MonoBehaviour
         Gizmos.color = Color.blue;
         BoundsInt bounds = GetBounds();
         Gizmos.DrawWireCube(transform.position + (Vector3)bounds.position + new Vector3(bounds.size.x, bounds.size.y) * 0.5f, new Vector3(bounds.size.x, bounds.size.y, 1));
+    }
+
+    public Transform GetRandomSpawnPoint()
+    {
+        if (spawnPoints.Length == 0)
+        {
+            Debug.LogWarning("No spawn points found in the room prefab: " + gameObject.name);
+            return null;
+        }
+
+        int randomIndex = Random.Range(0, spawnPoints.Length);
+        return spawnPoints[randomIndex];
     }
 
 }

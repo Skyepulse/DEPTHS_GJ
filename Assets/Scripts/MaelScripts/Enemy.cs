@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         health -= (float)damageAmount;
+
+        Instantiate(PrefabManager.Instance.EnemyDamageEffect, transform.position, Quaternion.identity);
+        
         if (health <= 0)
         {
             Die();
