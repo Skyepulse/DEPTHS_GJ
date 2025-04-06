@@ -228,8 +228,8 @@ TextureImporter:
       name: tile_map_4
       rect:
         serializedVersion: 2
-        x: 96
-        y: 216
+        x: 168
+        y: 192
         width: 24
         height: 24
       alignment: 0
@@ -250,8 +250,8 @@ TextureImporter:
       name: tile_map_5
       rect:
         serializedVersion: 2
-        x: 120
-        y: 216
+        x: 192
+        y: 144
         width: 24
         height: 24
       alignment: 0
@@ -485,8 +485,8 @@ TextureImporter:
       name: tile_map_15
       rect:
         serializedVersion: 2
-        x: 120
-        y: 192
+        x: 168
+        y: 144
         width: 24
         height: 24
       alignment: 0
@@ -651,8 +651,8 @@ TextureImporter:
       name: tile_map_22
       rect:
         serializedVersion: 2
-        x: 96
-        y: 168
+        x: 144
+        y: 192
         width: 24
         height: 24
       alignment: 0
