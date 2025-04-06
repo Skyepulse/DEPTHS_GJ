@@ -11,6 +11,9 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private int numRooms = 5;
 
+    [SerializeField]
+    private GameObject tunnelPrefab;
+
     public enum Direction
     {
         North,
@@ -27,21 +30,6 @@ public class MapGenerator : MonoBehaviour
         public Room.Door doorOut;
     }
 
-    private List<Room.Door> GetDoorPositions(Room room, Direction direction)
-    {
-        List<Room.Door> doors = new();
-
-        foreach (var door in room.doors)
-        {
-            if (door.direction == direction)
-            {
-                doors.Add(door);
-            }
-        }
-
-        return doors;
-    }
-
     private Direction GetOppositeDirection(Direction direction)
     {
         if (direction == Direction.None)
@@ -50,38 +38,6 @@ public class MapGenerator : MonoBehaviour
         return (Direction)(((int)direction + 2) % 4);
     }
 
-    private BoundsInt GetRoomBounds(GameObject room)
-    {
-        Tilemap tilemap = room.GetComponentInChildren<Tilemap>();
-        if (tilemap == null)
-        {
-            Debug.LogWarning("No Tilemap found in the room prefab: " + room.name);
-            return new BoundsInt();
-        }
-
-        BoundsInt globalBounds = tilemap.cellBounds;
-        Vector2Int min = new(int.MaxValue, int.MaxValue);
-        Vector2Int max = new(int.MinValue, int.MinValue);
-
-        for (int x = globalBounds.x; x < globalBounds.xMax; x++)
-        {
-            for (int y = globalBounds.y; y < globalBounds.yMax; y++)
-            {
-                Vector3Int localPosition = new(x, y, 0);
-                TileBase tile = tilemap.GetTile(localPosition);
-                if (tile != null)
-                {
-                    min.x = Mathf.Min(min.x, x);
-                    min.y = Mathf.Min(min.y, y);
-                    max.x = Mathf.Max(max.x, x);
-                    max.y = Mathf.Max(max.y, y);
-                }
-            }
-        }
-
-        return new BoundsInt(new Vector3Int(min.x, min.y, 0), new Vector3Int(max.x - min.x + 1, max.y - min.y + 1, 1));
-
-    }
 
     private bool Intersects(BoundsInt a, BoundsInt b)
     {
@@ -116,16 +72,8 @@ public class MapGenerator : MonoBehaviour
             {
                 attempts++;
 
-                List<Room.Door> newRoomDoorCandidates = new();
-                foreach (var door in roomNodes[i - 1].room.GetComponent<Room>().doors)
-                {
-                    if (door.direction != roomNodes[i - 1].doorOut.direction)
-                    {
-                        Room.Door modifiedDoor = door;
-                        modifiedDoor.room = roomNodes[i - 1].room.GetComponent<Room>();
-                        newRoomDoorCandidates.Add(modifiedDoor);
-                    }
-                }
+                List<Room.Door> newRoomDoorCandidates = roomNodes[i - 1].doorIn.room.GetComponent<Room>().GetDoorPositions(roomNodes[i - 1].doorIn.direction, true);
+
                 roomNodes[i - 1].doorOut = newRoomDoorCandidates[Random.Range(0, newRoomDoorCandidates.Count)];
 
                 Direction roomDirection = GetOppositeDirection(roomNodes[i - 1].doorOut.direction);
@@ -135,15 +83,13 @@ public class MapGenerator : MonoBehaviour
                 List<Room.Door> candidateDoors = new();
                 foreach (GameObject roomPrefab in roomPrefabs)
                 {
-                    List<Room.Door> roomDoors = GetDoorPositions(roomPrefab.GetComponent<Room>(), roomDirection);
-
+                    List<Room.Door> roomDoors = roomPrefab.GetComponent<Room>().GetDoorPositions(roomDirection);
                     foreach (var door in roomDoors)
-                        if (door.direction == roomDirection)
-                        {
-                            Room.Door modifiedDoor = door;
-                            modifiedDoor.room = roomPrefab.GetComponent<Room>();
-                            candidateDoors.Add(modifiedDoor);
-                        }
+                    {
+                        Room.Door modifiedDoor = door;
+                        modifiedDoor.room = roomPrefab.GetComponent<Room>();
+                        candidateDoors.Add(modifiedDoor);
+                    }
                 }
                 if (candidateDoors.Count == 0)
                 {
@@ -162,8 +108,8 @@ public class MapGenerator : MonoBehaviour
                 // Check intersection with previously placed rooms
                 for (int j = 0; j < i - 1; j++)
                 {
-                    BoundsInt roomBounds = GetRoomBounds(roomNodes[j].room);
-                    BoundsInt newRoomBounds = GetRoomBounds(newDoorIn.room.GetPrefab());
+                    BoundsInt roomBounds = roomNodes[j].room.GetComponent<Room>().GetBounds();
+                    BoundsInt newRoomBounds = newDoorIn.room.GetPrefab().GetComponent<Room>().GetBounds();
                     newRoomBounds.position += Vector3Int.FloorToInt(spawnPosition);
                     roomBounds.position += Vector3Int.FloorToInt(roomNodes[j].room.transform.position);
 
@@ -189,28 +135,58 @@ public class MapGenerator : MonoBehaviour
             if (!roomFound) return;
         }
 
-        // Remove all door tiles from the rooms
-
+        // Place tunnels between rooms
         for (int i = 0; i < numRooms; i++)
         {
-            Tilemap tilemap = roomNodes[i].room.GetComponentInChildren<Tilemap>();
-            if (tilemap == null)
+            List<Room.Door> doors = roomNodes[i].room.GetComponent<Room>().GetDoors();
+            for (int j = 0; j < doors.Count; j++)
             {
-                Debug.LogWarning("No Tilemap found in the room prefab: " + roomNodes[i].room.name);
-                continue;
-            }
+                Room.Door door = doors[j];
 
-            foreach (var door in roomNodes[i].room.GetComponent<Room>().doors)
-            {
-                if (door.position != roomNodes[i].doorOut.position)
+                if (roomNodes[i].doorOut == null || door.position != roomNodes[i].doorOut.position)
                 {
-                    Vector3Int localPosition = new(door.position.x, door.position.y, 0);
-                    TileBase tile = tilemap.GetTile(localPosition);
-                    tilemap.SetTile(localPosition, null); // Remove the door tile
-
+                    Vector3 localPosition = new Vector3(door.position.x, door.position.y, 0) + roomNodes[i].room.transform.position;
+                    Vector3Int spawnPosition = Vector3Int.FloorToInt(localPosition);
+                    GameObject tunnel = Instantiate(tunnelPrefab, spawnPosition, Quaternion.identity);
+                    tunnel.transform.SetParent(transform);
+                    if (tunnel.TryGetComponent<Tunnel>(out var tunnelComponent))
+                    {
+                        tunnelComponent.Direction = door.direction;
+                        tunnelComponent.SetOpen(false);
+                        door.tunnel = tunnelComponent;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Tunnel component not found on the tunnel prefab: " + tunnelPrefab.name);
+                    }
                 }
             }
         }
+
+
+
+        // Remove all door tiles from the rooms
+
+        // for (int i = 0; i < numRooms; i++)
+        // {
+        //     Tilemap tilemap = roomNodes[i].room.GetComponentInChildren<Tilemap>();
+        //     if (tilemap == null)
+        //     {
+        //         Debug.LogWarning("No Tilemap found in the room prefab: " + roomNodes[i].room.name);
+        //         continue;
+        //     }
+
+        //     foreach (var door in roomNodes[i].room.GetComponent<Room>().doors)
+        //     {
+        //         if (door.position != roomNodes[i].doorOut.position)
+        //         {
+        //             Vector3Int localPosition = new(door.position.x, door.position.y, 0);
+        //             TileBase tile = tilemap.GetTile(localPosition);
+        //             tilemap.SetTile(localPosition, null); // Remove the door tile
+
+        //         }
+        //     }
+        // }
 
         Debug.Log("Map generation complete. Steps: " + generationSteps);
     }

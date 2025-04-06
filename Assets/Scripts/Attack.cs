@@ -56,7 +56,7 @@ public class Attack : MonoBehaviour
         //log
         Debug.Log("Attack collided");
         // Check if the collided object has the EnemyGeneral component
-        PlayerController player = collision.GetComponent<PlayerController>();
+        PlayerController player = collision.gameObject.transform.parent.GetComponent<PlayerController>();
         if (player != null)
         {
             // Deal damage to the enemy
