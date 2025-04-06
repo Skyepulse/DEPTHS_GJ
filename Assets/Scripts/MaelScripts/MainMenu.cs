@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class MainMenu: MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     [SerializeField] private string gameSceneName;
     [SerializeField] private string creditSceneName;
@@ -12,8 +12,13 @@ public class MainMenu: MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private Button creditButton;
 
+    [SerializeField] private GameObject followGameObject;
+    [SerializeField] private float followSpeed = 10f;
+
+    [SerializeField] private Camera uiCamera;
+
     //================================//
-    public void Awake()
+    private void Awake()
     {
         if (string.IsNullOrEmpty(gameSceneName))
         {
@@ -47,23 +52,41 @@ public class MainMenu: MonoBehaviour
     }
 
     //================================//
-    public void OnPlayButtonClicked()
+    private void Update()
     {
-        // Load the game scene
+        if (followGameObject == null || uiCamera == null)
+            return;
+
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = uiCamera.nearClipPlane + 1f; // Push slightly in front of the camera
+
+        Vector3 worldPos = uiCamera.ScreenToWorldPoint(mousePos);
+        followGameObject.transform.position = Vector3.Lerp(followGameObject.transform.position, worldPos, Time.deltaTime * followSpeed);
+
+        // rotate on z axis to face the mouse
+        Vector3 lookAt = worldPos - followGameObject.transform.position;
+        lookAt.z = 0f; // Keep z axis zero to avoid tilting
+
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, lookAt);
+        followGameObject.transform.rotation = Quaternion.Slerp(followGameObject.transform.rotation, rotation, Time.deltaTime * 10f);
+    }
+
+
+    //================================//
+    private void OnPlayButtonClicked()
+    {
         SceneManager.LoadScene(gameSceneName);
     }
 
     //================================//
-    public void OnExitButtonClicked()
+    private void OnExitButtonClicked()
     {
-        // Exit the game
         Application.Quit();
     }
 
     //================================//
-    public void OnCreditButtonClicked()
+    private void OnCreditButtonClicked()
     {
-        // Load the credit scene
         SceneManager.LoadScene(creditSceneName);
     }
 }
