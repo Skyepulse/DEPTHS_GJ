@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         public int difficultyLevel;
         public int maxRoomEnemies;
         public Color depthColor;
-        public Transform SpawnPoint;
+        public Vector3 SpawnPoint;
         public List<Enemy> enemies;
     }
 
@@ -103,6 +103,9 @@ public class GameManager : MonoBehaviour
         int difficultyLevel = dungeonFloors[floorLevel].difficultyLevel;
 
         // TODO
+        MapGenerator.Instance.GenerateMap(numberOfRooms);
+        dungeonFloors[floorLevel].SpawnPoint = MapGenerator.Instance.GetSpawnPoint();
+  
 
         // Cleanup and Spawn Player
         SpawnPlayer();
@@ -119,7 +122,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Create new Character Controller
-        PlayerController player = Instantiate(PrefabManager.Instance.Player, dungeonFloors[_currentFloor].SpawnPoint.position, Quaternion.identity).GetComponent<PlayerController>();
+        PlayerController player = Instantiate(PrefabManager.Instance.Player, dungeonFloors[_currentFloor].SpawnPoint, Quaternion.identity).GetComponent<PlayerController>();
         _playerController = player;
 
         // Search for main camera and attach the player
