@@ -389,9 +389,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  damage: 10
-  speed: 5
-  attackRange: 1.5
   healthBar: {fileID: 1285451869}
 --- !u!70 &252499368
 CapsuleCollider2D:
@@ -561,9 +558,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  damage: 10
-  speed: 5
-  attackRange: 1.5
   healthBar: {fileID: 134402960}
 --- !u!70 &294449845
 CapsuleCollider2D:
@@ -953,9 +947,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  damage: 10
-  speed: 5
-  attackRange: 1.5
   healthBar: {fileID: 887922915}
 --- !u!1 &816793739
 GameObject:
@@ -990,9 +981,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  damage: 10
-  speed: 5
-  attackRange: 1.5
   healthBar: {fileID: 295582077}
 --- !u!70 &816793741
 CapsuleCollider2D:
@@ -1475,15 +1463,15 @@ PrefabInstance:
       objectReference: {fileID: 966367225}
     - target: {fileID: 2838227454812414411, guid: 5415381088ef73845ac09dc8cc27c440, type: 3}
       propertyPath: dungeonFloors.Array.data[0].depthColor.b
-      value: 0.89046586
+      value: 0.5613208
       objectReference: {fileID: 0}
     - target: {fileID: 2838227454812414411, guid: 5415381088ef73845ac09dc8cc27c440, type: 3}
       propertyPath: dungeonFloors.Array.data[0].depthColor.g
-      value: 0.9811321
+      value: 0.67449003
       objectReference: {fileID: 0}
     - target: {fileID: 2838227454812414411, guid: 5415381088ef73845ac09dc8cc27c440, type: 3}
       propertyPath: dungeonFloors.Array.data[0].depthColor.r
-      value: 0.45817015
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2838227454812414411, guid: 5415381088ef73845ac09dc8cc27c440, type: 3}
       propertyPath: dungeonFloors.Array.data[0].maxRoomEnemies
