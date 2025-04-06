@@ -299,7 +299,7 @@ MonoBehaviour:
   attackRangeMax: 8
   detectRange: 8
   attackCooldown: 2
-  attackPrefab: {fileID: 5804064736283882879, guid: ffa625baa3413c80f84b63e8363150f2, type: 3}
+  attackPrefab: {fileID: 5661583332410520057, guid: 5c880fbff90bf31d6804624998b57237, type: 3}
   FieldOfView: {fileID: 0}
   VisualNode: {fileID: 0}
 --- !u!1001 &2404274962426666855
