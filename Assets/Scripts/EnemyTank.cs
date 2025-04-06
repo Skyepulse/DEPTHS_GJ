@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class EnemyGeneral : MonoBehaviour
+public class EnemyTank : Enemy
 {
-    [SerializeField] private int health = 10;
     [SerializeField] private int damage = 10;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float attackRange = 1.5f;
@@ -15,7 +14,6 @@ public class EnemyGeneral : MonoBehaviour
     [SerializeField] private CircleCollider2D FieldOfView;
 
     //================================//
-    public int Health => health;
     public int Damage => damage;
     public float Speed => speed;
     public float AttackRange => attackRange;
@@ -38,8 +36,9 @@ public class EnemyGeneral : MonoBehaviour
     }
 
     //================================//
-    void Update()
+    public override void Update()
     {
+        base.Update();
         //manage cooldown
         if (attackCooldownTimer > 0)
         {
@@ -63,22 +62,7 @@ public class EnemyGeneral : MonoBehaviour
 
     }
 
-    //================================//
-    public void TakeDamage(int damageAmount)
-    {
-        health -= damageAmount;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
 
-    //================================//
-    private void Die()
-    {
-        Debug.Log(this.gameObject.name + " has died!");
-        Destroy(gameObject);
-    }
 
     // ================================//
     private void Attack(Vector2 targetPosition)
@@ -100,14 +84,13 @@ public class EnemyGeneral : MonoBehaviour
     {
         // rotate towards the target position
 
-
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
 
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-        if (distanceToTarget <= attackRange - 0.5f)
+        if (distanceToTarget <= attackRange / 2.0f)
         {
             return;
         }
@@ -124,9 +107,11 @@ public class EnemyGeneral : MonoBehaviour
     private void DoWhenCollision(Collider2D collision)
     {
         // Check if the collided object has the PlayerController component
-        PlayerController player = collision.GetComponent<PlayerController>();
+        PlayerController player = collision.gameObject.transform.parent.GetComponent<PlayerController>();
+        Debug.Log("Collision detected with: " + collision.gameObject.name);
         if (player != null)
         {
+            Debug.Log("Player detected!");
             //get player position
             Vector2 playerPosition = player.transform.position;
             //check if player is in range
@@ -134,7 +119,7 @@ public class EnemyGeneral : MonoBehaviour
 
             float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
-            if (distanceToPlayer <= detectRange && coolDownOver)
+            if (distanceToPlayer <= attackRange && coolDownOver)
             {
                 // Attack the player
                 Attack(playerPosition);
@@ -149,10 +134,12 @@ public class EnemyGeneral : MonoBehaviour
 
         lastCollision = collision;
         playerVisible = true;
+
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         lastCollision = collision;
+
         playerVisible = true;
     }
 
