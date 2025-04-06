@@ -49,6 +49,7 @@ public class Minion : Enemy
     //================================//
     public override void Update()
     {
+        //call parent function
         base.Update();
         //manage cooldown
         if (attackCooldownTimer > 0)
@@ -68,6 +69,7 @@ public class Minion : Enemy
             if (lastCollision != null)
             {
                 DoWhenCollision(lastCollision);
+
             }
         }
 
