@@ -101,14 +101,17 @@ public class EnemyTank : Enemy
 
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-        if (distanceToTarget <= attackRange / 2.0f)
+        if (distanceToTarget <= 2.5f)
         {
+            // If the distance is less than or equal to the attack range, stop moving
+            transform.position = transform.position;
             return;
         }
 
 
+
         // Move forwards
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        else { transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); }
     }
 
     //================================//
