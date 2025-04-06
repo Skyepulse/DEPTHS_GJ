@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a81964d28b4335e468bb71d892a2f5c0
+guid: de13878a90f8f21d3940b8a6ab0e52b0
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -322,15 +322,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      play_button_atlas_0: 814375966913355942
-      play_button_atlas_1: 933443867848601148
-      play_button_atlas_2: -1721475362266842878
-      play_button_atlas_3: -8472309204696889601
-      play_button_atlas_4: -6693825378854007113
-      play_button_atlas_5: 5088358880677582566
-      play_button_atlas_6: -8763910820868065439
-      play_button_atlas_7: 3514998068807422247
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
