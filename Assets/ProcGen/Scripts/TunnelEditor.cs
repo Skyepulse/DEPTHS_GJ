@@ -9,17 +9,17 @@ public class TunnelEditor : Editor
         DrawDefaultInspector();
 
         Tunnel tunnel = (Tunnel)target;
-        bool open = tunnel.IsOpen;
+        Tunnel.State state = tunnel.curState;
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Tunnel State", EditorStyles.boldLabel);
-        EditorGUILayout.LabelField(open ? "Open" : "Closed");
+        EditorGUILayout.LabelField("Current State: " + state.ToString());
         EditorGUILayout.Space();
 
         if (GUILayout.Button("Toggle Tunnel"))
         {
-            open = !open;
-            tunnel.SetOpen(open);
+            state = (Tunnel.State)(((int)state + 1) % 3);
+            tunnel.SetState(state);
         }
     }
 }

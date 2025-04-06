@@ -2,10 +2,19 @@ using UnityEngine;
 
 public class Tunnel : MonoBehaviour
 {
+
+    public enum State
+    {
+        Open,
+        Closed,
+        Wall
+    }
+
     private Transform open;
     private Transform closed;
+    private Transform wall;
 
-    private bool isOpen = false;
+    private State state = State.Wall;
 
     [SerializeField]
     private MapGenerator.Direction direction = MapGenerator.Direction.None;
@@ -25,23 +34,25 @@ public class Tunnel : MonoBehaviour
         Direction = direction;
     }
 
-    public void SetOpen(bool isOpen)
+    public void SetState(State state)
     {
-        this.isOpen = isOpen;
-        if (open == null || closed == null)
+        this.state = state;
+        if (open == null || closed == null || wall == null)
         {
             open = transform.Find("Open");
             closed = transform.Find("Closed");
+            wall = transform.Find("Wall");
         }
 
-        open.gameObject.SetActive(isOpen);
-        closed.gameObject.SetActive(!isOpen);
+        open.gameObject.SetActive(state == State.Open);
+        closed.gameObject.SetActive(state == State.Closed);
+        wall.gameObject.SetActive(state == State.Wall);
     }
 
-    public bool IsOpen
+    public State curState
     {
-        get => isOpen;
-        set => SetOpen(value);
+        get => state;
+        set => SetState(value);
     }
 
 
