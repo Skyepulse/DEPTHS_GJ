@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "DEPTHS_GJ.sln"
+    "dotnet.defaultSolution": "DEPTHS_GJ.sln",
+    "dotnet.preferCSharpExtension": true
 }
