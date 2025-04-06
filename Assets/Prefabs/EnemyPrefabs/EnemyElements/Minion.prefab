@@ -113,6 +113,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   healthBar: {fileID: 0}
+  damage: 10
+  speed: 5
+  attackRange: 1.5
+  detectRange: 6
+  attackCooldown: 0.5
+  attackPrefab: {fileID: 5804064736283882879, guid: ffa625baa3413c80f84b63e8363150f2, type: 3}
+  FieldOfView: {fileID: 6645614399793153406}
+  VisualNode: {fileID: 0}
 --- !u!1 &4439019820385585296
 GameObject:
   m_ObjectHideFlags: 0
