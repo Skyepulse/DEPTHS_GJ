@@ -104,6 +104,8 @@ MonoBehaviour:
   fullColor: {r: 0, g: 1, b: 0, a: 1}
   emptyColor: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 8401859542505485466}
+  hideWhenFull: 0
+  barNode: {fileID: 0}
 --- !u!1 &7975620078927392864
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4049311251827261129}
+  - component: {fileID: -1594961294030489752}
   m_Layer: 0
   m_Name: valueBar
   m_TagString: Untagged
@@ -224,3 +227,21 @@ Transform:
   - {fileID: 9160276805042792160}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1594961294030489752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8723821180580964246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd90d3b864992c44694f90a7f96f355f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSize: 1.5
+  fullColor: {r: 0, g: 1, b: 0, a: 1}
+  emptyColor: {r: 1, g: 0, b: 0, a: 1}
+  spriteRenderer: {fileID: 0}
+  hideWhenFull: 0
+  barNode: {fileID: 0}

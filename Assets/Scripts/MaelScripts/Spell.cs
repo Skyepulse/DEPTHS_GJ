@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Spell: MonoBehaviour
+public class Spell : MonoBehaviour
 {
     public static UnityAction<Spell> onSpellHit;
     public static UnityAction<Spell> onSpellSpawn;
@@ -15,18 +15,18 @@ public class Spell: MonoBehaviour
     }
 
     //================================//
-    protected eSpellType        spellType;
-    protected int               spellDamage;
-    protected int               spellCost;
-    protected Collider2D        spellCollider;
-    protected float             spellDuration;
+    protected eSpellType spellType;
+    protected int spellDamage;
+    protected int spellCost;
+    protected Collider2D spellCollider;
+    protected float spellDuration;
 
     //================================//
-    protected float             lifeTimer = 0f;
+    protected float lifeTimer = 0f;
     //================================//
-    public eSpellType           SpellType     => spellType;
-    public int                  SpellDamage   => spellDamage;
-    public int                  SpellCost     => spellCost;
+    public eSpellType SpellType => spellType;
+    public int SpellDamage => spellDamage;
+    public int SpellCost => spellCost;
 
     //================================//
     protected void Start()
@@ -75,7 +75,7 @@ public class Spell: MonoBehaviour
     {
         onSpellDie?.Invoke(spellDie);
     }
-    
+
     //================================//
     public virtual void OnHit()
     {
@@ -106,7 +106,7 @@ public class Spell: MonoBehaviour
         if (collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             OnHit();
-            Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+            Enemy enemy = collider.gameObject.transform.parent.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(spellDamage);
@@ -115,7 +115,8 @@ public class Spell: MonoBehaviour
             {
                 Debug.LogError("Enemy component is missing on the collided object!");
             }
-        } else if (collider.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        }
+        else if (collider.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             Die();
         }

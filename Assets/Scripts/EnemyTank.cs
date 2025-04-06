@@ -13,6 +13,8 @@ public class EnemyTank : Enemy
 
     [SerializeField] private CircleCollider2D FieldOfView;
 
+    [SerializeField] private GameObject VisualNode;
+
     //================================//
     public int Damage => damage;
     public float Speed => speed;
@@ -27,12 +29,21 @@ public class EnemyTank : Enemy
 
     private Collider2D lastCollision;
     private bool playerVisible = false;
+
     //================================//
     void Start()
     {
         // Initialize the enemy
         FieldOfView = GetComponent<CircleCollider2D>();
         FieldOfView.radius = detectRange;
+    }
+
+    private void Awake()
+    {
+        if (VisualNode == null)
+        {
+            VisualNode = transform.GetChild(0).gameObject;
+        }
     }
 
     //================================//
@@ -86,7 +97,7 @@ public class EnemyTank : Enemy
 
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+        VisualNode.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
 
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
