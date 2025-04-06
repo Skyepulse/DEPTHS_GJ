@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour
         public int maxRoomEnemies;
         public Color depthColor;
         public Vector3 SpawnPoint;
+        [HideInInspector]
         public List<Enemy> enemies;
+        public List<GameObject> enemyPrefabs;
     }
 
     //================================//
@@ -130,6 +132,7 @@ public class GameManager : MonoBehaviour
         if (camera != null)
         {
             camera.SetTarget(player.transform);
+            camera.transform.position = new Vector3(dungeonFloors[_currentFloor].SpawnPoint.x, dungeonFloors[_currentFloor].SpawnPoint.y, camera.transform.position.z);
         }
         else
         {
