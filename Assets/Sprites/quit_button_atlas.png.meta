@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      quit_button_atlas_0: -249196303853313607
+      quit_button_atlas_1: 9220867811883707622
+      quit_button_atlas_2: 745978009252551305
+      quit_button_atlas_3: -3407458882230243005
+      quit_button_atlas_4: 4552842523688571446
+      quit_button_atlas_5: 3569146523238876962
+      quit_button_atlas_6: 1008407424214050719
+      quit_button_atlas_7: 7127306908715489008
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
