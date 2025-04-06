@@ -10,6 +10,8 @@ public class EnemyBroodmother : Enemy
 
     [SerializeField] private float eggDistanceSpawn = 3.0f;
     [SerializeField] private CircleCollider2D fieldOfView;
+    [SerializeField] private GameObject VisualNode;
+
 
 
     private float spawnTimer = 0f;
@@ -37,6 +39,14 @@ public class EnemyBroodmother : Enemy
     {
         fieldOfView = GetComponent<CircleCollider2D>();
         fieldOfView.radius = detectRange;
+    }
+
+    private void Awake()
+    {
+        if (VisualNode == null)
+        {
+            VisualNode = transform.GetChild(0).gameObject;
+        }
     }
 
     //================================//
@@ -69,14 +79,14 @@ public class EnemyBroodmother : Enemy
     {
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+        VisualNode.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
 
     private void moveAwayFrom(Vector2 targetPosition)
     {
         Vector2 direction = ((Vector2)transform.position - targetPosition).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        VisualNode.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
         this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
         transform.position = Vector2.MoveTowards(transform.position, (Vector2)transform.position - targetPosition, speed * Time.deltaTime);
     }
