@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      menu_button_atlas_0: 19612719555984651
+      menu_button_atlas_1: -2243611904393683553
+      menu_button_atlas_2: 7246793445910689053
+      menu_button_atlas_3: 275448456265899863
+      menu_button_atlas_4: 7940366025022845488
+      menu_button_atlas_5: 6458304529952321577
+      menu_button_atlas_6: -2921004068806890806
+      menu_button_atlas_7: 1385371234938659398
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
