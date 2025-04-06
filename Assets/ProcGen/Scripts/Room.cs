@@ -14,6 +14,7 @@ public class Room : MonoBehaviour
     }
 
     public Door[] doors;
+    public Transform[] spawnPoints;
 
     public GameObject GetPrefab()
     {
