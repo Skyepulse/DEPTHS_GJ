@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+// Visual Effect
+using UnityEngine.VFX;
 
 public class PlayerController : MonoBehaviour
 {
@@ -237,6 +239,9 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
+
+        Instantiate(PrefabManager.Instance.DamageEffect, transform.position, Quaternion.identity);
+
         if (currentHealth <= 0)
         {
             Die();
