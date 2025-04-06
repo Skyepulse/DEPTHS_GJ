@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class ValueBar : MonoBehaviour
 {
-    [SerializeField] private float maxSize = 1.5f;
-    [SerializeField] private Color fullColor = Color.green;
-    [SerializeField] private Color emptyColor = Color.red;
+    [SerializeField] private float              maxSize = 1.5f;
+    [SerializeField] private Color              fullColor = Color.green;
+    [SerializeField] private Color              emptyColor = Color.red;
     
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    private float val;
+    [SerializeField] private SpriteRenderer     spriteRenderer;
+    [SerializeField] private bool               hideWhenFull = false;
+    [SerializeField] private                    GameObject barNode;
+    private float                               val;
 
     public float Value
     {
@@ -41,5 +43,14 @@ public class ValueBar : MonoBehaviour
 
         // Update color
         spriteRenderer.color = Color.Lerp(emptyColor, fullColor, val);
+
+        if ( hideWhenFull && barNode != null && val >= 1f )
+        {
+            barNode.SetActive(false);
+        }
+        else if ( barNode != null )
+        {
+            barNode.SetActive(true);
+        } 
     }
 }

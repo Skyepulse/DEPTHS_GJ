@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: dcecf731b0791d05abc410b4009b0a6b
+=======
+guid: 5d410946a040c7e489a23a68356950b4
+>>>>>>> main
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -208,7 +212,11 @@ TextureImporter:
         serializedVersion: 2
         x: 95
         y: 167
+<<<<<<< HEAD
         width: 98
+=======
+        width: 145
+>>>>>>> main
         height: 73
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -347,7 +355,20 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
+<<<<<<< HEAD
     nameFileIdTable: {}
+=======
+    nameFileIdTable:
+      tile_map_0: 909444148276766886
+      tile_map_1: -3344568106538371541
+      tile_map_2: -3634398366838870730
+      tile_map_3: -1850680290757873719
+      tile_map_4: 1705411122146539360
+      tile_map_5: -7310867040226725890
+      tile_map_6: 4987337381440321552
+      tile_map_7: -7684691248679950600
+      tile_map_8: -2304555971641990866
+>>>>>>> main
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

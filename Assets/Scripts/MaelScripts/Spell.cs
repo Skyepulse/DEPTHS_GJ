@@ -10,9 +10,8 @@ public class Spell: MonoBehaviour
     //================================//
     public enum eSpellType
     {
-        Electric,
-        Fire,
-        Ice,
+        Electric = 0,
+        Wave = 1,
     }
 
     //================================//
@@ -25,9 +24,9 @@ public class Spell: MonoBehaviour
     //================================//
     protected float             lifeTimer = 0f;
     //================================//
-    public eSpellType       SpellType     => spellType;
-    public int              SpellDamage   => spellDamage;
-    public int              SpellCost     => spellCost;
+    public eSpellType           SpellType     => spellType;
+    public int                  SpellDamage   => spellDamage;
+    public int                  SpellCost     => spellCost;
 
     //================================//
     protected void Start()

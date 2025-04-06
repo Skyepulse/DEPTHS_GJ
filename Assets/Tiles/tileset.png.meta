@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 689da2c450bcdd64da0eb8d17814207b
+guid: 4a7e6ead997ec2c4ab9d0d947cda86d1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4734989952496239411
-    second: anim_nage_atlas_0
-  - first:
-      213: 1854530739885283120
-    second: anim_nage_atlas_1
+      213: 5663061954668274717
+    second: tileset_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,57 +113,35 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: anim_nage_atlas_0
+      name: tileset_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 0
-        width: 34
-        height: 49
+        x: 0
+        y: 16
+        width: 8
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3330595564016b140800000000000000
-      internalID: 4734989952496239411
+      spriteID: d142805f7dc379e40800000000000000
+      internalID: 5663061954668274717
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: anim_nage_atlas_1
+      name: tileset_1
       rect:
         serializedVersion: 2
-        x: 51
-        y: 3
-        width: 40
-        height: 44
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 03797e7d1ed9cb910800000000000000
-      internalID: 1854530739885283120
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: anim_nage_atlas_2
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 0
-        width: 35
-        height: 49
+        x: 8
+        y: 16
+        width: 8
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40ab8625187a20849951ae0e7a4bed73
-      internalID: 1547079855
+      spriteID: e8e0fa720c3e64541a8244325f7a15fc
+      internalID: 68117542
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: anim_nage_atlas_3
+      name: tileset_2
       rect:
         serializedVersion: 2
-        x: 146
-        y: 0
-        width: 42
-        height: 49
+        x: 16
+        y: 16
+        width: 8
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bb1310ed27bd0046ad7a5d830c23971
-      internalID: 1151752116
+      spriteID: 9677bdbfcc3bd9b41be39adb6ec06360
+      internalID: -2099670782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: anim_nage_atlas_4
+      name: tileset_3
       rect:
         serializedVersion: 2
-        x: 200
-        y: 0
-        width: 37
-        height: 49
+        x: 0
+        y: 8
+        width: 8
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,20 +194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c761c4d8c1377f4b91d149c4499f3cc
-      internalID: -634647149
+      spriteID: 410641b9955276541996cc950a1ac44d
+      internalID: -310611416
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: anim_nage_atlas_5
+      name: tileset_4
       rect:
         serializedVersion: 2
-        x: 250
-        y: 0
-        width: 34
-        height: 49
+        x: 8
+        y: 8
+        width: 8
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,8 +216,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5a16128396951843a7d298d250eafd1
-      internalID: 132474069
+      spriteID: 3898b590c4fa327468f52f7591242300
+      internalID: -61730868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 672739ecf1a9a6f4d99c41e932bd35cf
+      internalID: 941142931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72ebc25d8e91d3140ae7d6dafab292d7
+      internalID: 1016731972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset_7
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74c65f5a42b898941bbb904879cb9ae5
+      internalID: 147769485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset_8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37dd387336fc1b641b96830df852bbaa
+      internalID: 907553822
       vertices: []
       indices: 
       edges: []
@@ -251,7 +314,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a60454dd03c6c834b9f5812bbfc2a4d4
+    spriteID: ced17b1c33d278345aa5d233b3f6e59f
     internalID: 0
     vertices: []
     indices: 
@@ -261,12 +324,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      anim_nage_atlas_0: 4734989952496239411
-      anim_nage_atlas_1: 1854530739885283120
-      anim_nage_atlas_2: 1547079855
-      anim_nage_atlas_3: 1151752116
-      anim_nage_atlas_4: -634647149
-      anim_nage_atlas_5: 132474069
+      tileset_0: 5663061954668274717
+      tileset_1: 68117542
+      tileset_2: -2099670782
+      tileset_3: -310611416
+      tileset_4: -61730868
+      tileset_5: 941142931
+      tileset_6: 1016731972
+      tileset_7: 147769485
+      tileset_8: 907553822
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
