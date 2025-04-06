@@ -1272,6 +1272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyRange
       objectReference: {fileID: 0}
+    - target: {fileID: 8085740291411815983, guid: d7ca943379af7bb76b9338581263c8e6, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 28574173}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -108,14 +108,20 @@ public class EnemyTank : Enemy
     {
         // Check if the collided object has the PlayerController component
         PlayerController player = collision.gameObject.transform.parent.GetComponent<PlayerController>();
-        Debug.Log("Collision detected with: " + collision.gameObject.name);
         if (player != null)
         {
-            Debug.Log("Player detected!");
             //get player position
             Vector2 playerPosition = player.transform.position;
             //check if player is in range
             moveTo(playerPosition);
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, playerPosition - (Vector2)transform.position, detectRange, LayerMask.GetMask("Obstacle"));
+            if (hit.collider != null)
+            {
+                // If the raycast hits an obstacle, do not attack
+                Debug.Log("Obstacle detected in between");
+                return;
+            }
 
             float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
