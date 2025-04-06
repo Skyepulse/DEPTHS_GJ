@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class EnemyTank : Enemy
+
+public class EnemyRanged : Enemy
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private float attackRangeMin = 4f;
+    [SerializeField] private float attackRangeMax = 6f;
 
     [SerializeField] private float detectRange = 6.0f;
 
@@ -16,7 +18,8 @@ public class EnemyTank : Enemy
     //================================//
     public int Damage => damage;
     public float Speed => speed;
-    public float AttackRange => attackRange;
+    public float AttackRangeMax => attackRangeMax;
+    public float AttackRangeMin => attackRangeMin;
     public float DetectRange => detectRange;
     public float AttackCooldown => attackCooldown;
     public Attack AttackPrefab => attackPrefab;
@@ -90,7 +93,7 @@ public class EnemyTank : Enemy
 
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-        if (distanceToTarget <= attackRange / 2.0f)
+        if (distanceToTarget <= attackRangeMin / 2.0f)
         {
             return;
         }
@@ -115,11 +118,24 @@ public class EnemyTank : Enemy
             //get player position
             Vector2 playerPosition = player.transform.position;
             //check if player is in range
-            moveTo(playerPosition);
+
 
             float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
-            if (distanceToPlayer <= attackRange && coolDownOver)
+            if (distanceToPlayer > attackRangeMax)
+            {
+                // Move towards the player
+                moveTo(playerPosition);
+            }
+            else if (distanceToPlayer < attackRangeMin)
+            {
+                // Move away from the player
+                Vector2 direction = (playerPosition - (Vector2)transform.position).normalized;
+                Vector2 newPosition = (Vector2)transform.position - direction * speed * Time.deltaTime;
+                transform.position = newPosition;
+            }
+
+            if (distanceToPlayer <= attackRangeMax && coolDownOver)
             {
                 // Attack the player
                 Attack(playerPosition);
@@ -149,5 +165,6 @@ public class EnemyTank : Enemy
         lastCollision = null;
     }
 }
+
 
 
