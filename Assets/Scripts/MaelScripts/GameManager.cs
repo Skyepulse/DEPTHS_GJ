@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer()
     {
         // Destroy Character Controller if it exists
-        PlayerController existingPlayer = FindFirstObjectOfType<PlayerController>();
+        PlayerController existingPlayer = FindFirstObjectByType<PlayerController>();
         if (existingPlayer != null)
         {
             Destroy(existingPlayer.gameObject);
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
         _playerController = player;
 
         // Search for main camera and attach the player
-        CameraController camera = FindFirstObjectOfType<CameraController>();
+        CameraController camera = FindFirstObjectByType<CameraController>();
         if (camera != null)
         {
             camera.SetTarget(player.transform);
