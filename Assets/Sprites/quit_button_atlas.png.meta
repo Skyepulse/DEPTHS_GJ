@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: de13878a90f8f21d3940b8a6ab0e52b0
+guid: ad55487b0db6b9548b54fa8ac05887d4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 814375966913355942
-    second: play_button_atlas_0
+      213: -249196303853313607
+    second: quit_button_atlas_0
   - first:
-      213: 933443867848601148
-    second: play_button_atlas_1
+      213: 9220867811883707622
+    second: quit_button_atlas_1
   - first:
-      213: -1721475362266842878
-    second: play_button_atlas_2
+      213: 745978009252551305
+    second: quit_button_atlas_2
   - first:
-      213: -8472309204696889601
-    second: play_button_atlas_3
+      213: -3407458882230243005
+    second: quit_button_atlas_3
   - first:
-      213: -6693825378854007113
-    second: play_button_atlas_4
+      213: 4552842523688571446
+    second: quit_button_atlas_4
   - first:
-      213: 5088358880677582566
-    second: play_button_atlas_5
+      213: 3569146523238876962
+    second: quit_button_atlas_5
   - first:
-      213: -8763910820868065439
-    second: play_button_atlas_6
+      213: 1008407424214050719
+    second: quit_button_atlas_6
   - first:
-      213: 3514998068807422247
-    second: play_button_atlas_7
+      213: 7127306908715489008
+    second: quit_button_atlas_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -134,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: play_button_atlas_0
+      name: quit_button_atlas_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a06c7d80ae3d4b00800000000000000
-      internalID: 814375966913355942
+      spriteID: 9b1ab7d284daa8cf0800000000000000
+      internalID: -249196303853313607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: play_button_atlas_1
+      name: quit_button_atlas_1
       rect:
         serializedVersion: 2
         x: 48
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3ee1e0904244fc00800000000000000
-      internalID: 933443867848601148
+      spriteID: 6ec6920bb6a17ff70800000000000000
+      internalID: 9220867811883707622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: play_button_atlas_2
+      name: quit_button_atlas_2
       rect:
         serializedVersion: 2
         x: 96
@@ -193,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2097f7e57471c18e0800000000000000
-      internalID: -1721475362266842878
+      spriteID: 98a50cb0c0f3a5a00800000000000000
+      internalID: 745978009252551305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: play_button_atlas_3
+      name: quit_button_atlas_3
       rect:
         serializedVersion: 2
         x: 144
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff605c2aaaf4c6a80800000000000000
-      internalID: -8472309204696889601
+      spriteID: 341bae9333646b0d0800000000000000
+      internalID: -3407458882230243005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: play_button_atlas_4
+      name: quit_button_atlas_4
       rect:
         serializedVersion: 2
         x: 192
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7be89e88841ca13a0800000000000000
-      internalID: -6693825378854007113
+      spriteID: 63210ce3722fe2f30800000000000000
+      internalID: 4552842523688571446
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: play_button_atlas_5
+      name: quit_button_atlas_5
       rect:
         serializedVersion: 2
         x: 240
@@ -259,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6e6dd74517b7d9640800000000000000
-      internalID: 5088358880677582566
+      spriteID: 22749fc4ad7288130800000000000000
+      internalID: 3569146523238876962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: play_button_atlas_6
+      name: quit_button_atlas_6
       rect:
         serializedVersion: 2
         x: 288
@@ -281,14 +281,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 167f4f6aa85506680800000000000000
-      internalID: -8763910820868065439
+      spriteID: f972525a5359efd00800000000000000
+      internalID: 1008407424214050719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: play_button_atlas_7
+      name: quit_button_atlas_7
       rect:
         serializedVersion: 2
         x: 336
@@ -303,8 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 721537dce18c7c030800000000000000
-      internalID: 3514998068807422247
+      spriteID: 0f69c231fd749e260800000000000000
+      internalID: 7127306908715489008
       vertices: []
       indices: 
       edges: []
@@ -322,15 +322,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      play_button_atlas_0: 814375966913355942
-      play_button_atlas_1: 933443867848601148
-      play_button_atlas_2: -1721475362266842878
-      play_button_atlas_3: -8472309204696889601
-      play_button_atlas_4: -6693825378854007113
-      play_button_atlas_5: 5088358880677582566
-      play_button_atlas_6: -8763910820868065439
-      play_button_atlas_7: 3514998068807422247
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
