@@ -91,14 +91,16 @@ public class GameManager : MonoBehaviour
     //================================//
     public void InitializeGame(int floorLevel)
     {
+        // Cleanup Enemies
+        CleanupEnemies();
+
         // Create dungeon floor
         int numberOfRooms = dungeonFloors[floorLevel].roomCount;
         int difficultyLevel = dungeonFloors[floorLevel].difficultyLevel;
 
         // TODO
 
-        // Cleanup Enemies
-        CleanupEnemies();
+  
 
         // Cleanup and Spawn Player
         SpawnPlayer();
@@ -108,7 +110,7 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer()
     {
         // Destroy Character Controller if it exists
-        PlayerController existingPlayer = FindObjectOfType<PlayerController>();
+        PlayerController existingPlayer = FindFirstObjectOfType<PlayerController>();
         if (existingPlayer != null)
         {
             Destroy(existingPlayer.gameObject);
@@ -119,7 +121,7 @@ public class GameManager : MonoBehaviour
         _playerController = player;
 
         // Search for main camera and attach the player
-        CameraController camera = FindObjectOfType<CameraController>();
+        CameraController camera = FindFirstObjectOfType<CameraController>();
         if (camera != null)
         {
             camera.SetTarget(player.transform);
