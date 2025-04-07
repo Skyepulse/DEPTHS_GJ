@@ -291,4 +291,14 @@ private static MapGenerator _instance;
             roomNodes[roomIndex - 1].doorOut?.tunnel?.SetState(Tunnel.State.Closed);
         }
     }
+
+    public void OpenDoors(int roomIndex) {
+        if (roomIndex < 0 || roomIndex >= roomNodes.Length)
+        {
+            Debug.LogError("Invalid room index: " + roomIndex);
+            return;
+        }
+
+        roomNodes[roomIndex].doorOut?.tunnel?.SetState(Tunnel.State.Open);
+    }
 }
