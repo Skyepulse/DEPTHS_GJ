@@ -27,6 +27,11 @@ public class Enemy : MonoBehaviour
 
         Instantiate(PrefabManager.Instance.EnemyDamageEffect, transform.position, Quaternion.identity);
         
+        AudioSource audio = GetComponentInChildren<AudioSource>();
+        if (audio != null)
+        {
+            audio.Play();
+        }
         if (health <= 0)
         {
             Die();

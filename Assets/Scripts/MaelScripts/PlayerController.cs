@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 // Visual Effect
@@ -34,6 +35,12 @@ public class PlayerController : MonoBehaviour
     private float                           currentMana;
     private float                           currentHealth;
     private float                           currentStamina;
+
+    [SerializeField] private AudioSource    mainAudioSource;
+    [SerializeField] private AudioSource    damageAudioSource;
+    [SerializeField] private AudioSource    attackAudioSource;
+
+    private bool                            isDead = false;
 
     //================================//
     private void OnEnable()
@@ -91,11 +98,18 @@ public class PlayerController : MonoBehaviour
         if(PrefabManager.Instance == null){
             Debug.LogError("PrefabManager instance is not present in the scene!");
         }
+
+        if( mainAudioSource != null){
+            mainAudioSource.loop = true;
+            mainAudioSource.Play();
+        }
     }
 
     //================================//
     private void FixedUpdate()
     {
+        if (isDead) return;
+
         if (isSprinting)
         {
             if (currentStamina > 0)
@@ -208,6 +222,9 @@ public class PlayerController : MonoBehaviour
     //================================//
     private void OnAttackHit(Spell spellHit)
     {
+        if(attackAudioSource != null){
+            attackAudioSource.Play();
+        }
     }
 
     //================================//
@@ -245,6 +262,11 @@ public class PlayerController : MonoBehaviour
 
         Instantiate(PrefabManager.Instance.DamageEffect, transform.position, Quaternion.identity);
 
+        if (damageAudioSource != null)
+        {
+            damageAudioSource.Play();
+        }
+
         if (currentHealth <= 0)
         {
             Die();
@@ -254,7 +276,29 @@ public class PlayerController : MonoBehaviour
     //================================//
     private void Die()
     {
+        if (mainAudioSource != null)
+        {
+            mainAudioSource.Stop();
+        }
+
+        isDead = true;
+        VisualNode.SetActive(false);
+
+        healthBar.gameObject.SetActive(false);
+        manaBar.gameObject.SetActive(false);
+        staminaBar.gameObject.SetActive(false);
+
+        rb.linearVelocity = Vector2.zero;
+
+        StartCoroutine(DieAsync());
+    }
+
+    //================================//
+    private IEnumerator DieAsync()
+    {
+        // Play death animation or effect here
+        yield return new WaitForSeconds(1f); // Wait for the animation to finish
         GameManager.Instance.OnPlayerDeath();
-        Destroy(gameObject);
+        Destroy(gameObject); // Destroy the player object after the animation
     }
 }

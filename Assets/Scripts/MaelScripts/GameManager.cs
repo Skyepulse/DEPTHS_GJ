@@ -176,7 +176,7 @@ public class GameManager : MonoBehaviour
     //================================//
     private IEnumerator RespawnAfterDelay()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         InitializeGame(_currentFloor);
     }
 
