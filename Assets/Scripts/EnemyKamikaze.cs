@@ -16,6 +16,8 @@ public class EnemyKamikaze : Enemy
 
     [SerializeField] private CircleCollider2D FieldOfView;
     [SerializeField] private GameObject VisualNode;
+    [SerializeField] private Attack attackPrefab;
+    public Attack bombAttack => attackPrefab;
 
     private Collider2D lastCollision;
     private bool playerVisible = false;
@@ -99,7 +101,7 @@ public class EnemyKamikaze : Enemy
         hasExploded = true;
 
         // Deal damage
-        player.TakeDamage(damage); // Assuming your PlayerController has this
+        attack();
 
         // Play explosion effect
         if (explosionEffect != null)
@@ -141,6 +143,16 @@ public class EnemyKamikaze : Enemy
             yield return new WaitForSeconds(0.05f);
         }
     }
+
+    private void attack()
+    {
+        Attack attack = Instantiate(bombAttack, this.transform.position, Quaternion.identity);
+        attack.SetDamage(damage);
+        attack.SetLifetime(explodeDelay);
+        attack.SetDestination(transform.position);
+    }
+
+
 
 }
 

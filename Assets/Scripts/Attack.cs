@@ -1,5 +1,7 @@
 using UnityEngine;
+using System;
 
+[Serializable]
 public class Attack : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -66,6 +68,14 @@ public class Attack : MonoBehaviour
             Destroy(gameObject);
         }
 
+    }
+    public void SetDamage(int newDamage)
+    {
+        damage = newDamage;
+    }
+    public void SetLifetime(float newLifetime)
+    {
+        lifetime = newLifetime;
     }
 
 }

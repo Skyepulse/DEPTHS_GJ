@@ -121,7 +121,8 @@ MonoBehaviour:
   explodeCountdown: 2
   explosionEffect: {fileID: 6069308252051057241, guid: 83c0af3ec9808274eb19d06255bfe583, type: 3}
   FieldOfView: {fileID: 7535932209554524979}
-  VisualNode: {fileID: 0}
+  VisualNode: {fileID: 8595526834680842836}
+  attackPrefab: {fileID: 97379293945410679, guid: 33c4470b5f34ae2e3a54711cd3b37f01, type: 3}
 --- !u!1 &8346396630169235120
 GameObject:
   m_ObjectHideFlags: 0
