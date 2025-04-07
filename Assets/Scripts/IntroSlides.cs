@@ -2,37 +2,51 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class IntroSlides : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    RawImage[] slides;
-    string[] slideTexts = { "Welcome to the game!", "Get ready for an adventure!", "Good luck!" };
-    TextMeshProUGUI[] slideTextComponents;
-    RawImage currentSlide;
-    float slideDuration = 5f;
-    float slideTimer = 0f;
+    public GameObject[] slides; //these are objects that are children of the gameobject this script is attached to
+    //to activate and deactivate
+    [SerializeField] private float slideDuration = 5f; //how long each slide is shown
+    private float slideTimer = 0f; //timer to keep track of how long the slide has been shown
+    private int currentSlideIndex = 0; //index of the current slide
+    private GameObject currentSlide; //the current slide being shown
+
+    public float SlideDuration => slideDuration;
     void Start()
     {
-        slides = GetComponentsInChildren<RawImage>();
-        currentSlide = slides[0];
+        currentSlideIndex = 0;
+        currentSlide = slides[currentSlideIndex];
+        currentSlide.gameObject.SetActive(true);
         for (int i = 1; i < slides.Length; i++)
         {
             slides[i].gameObject.SetActive(false);
         }
+        slideTimer = 0f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //when all slides done call other scene and destroy this scene
         slideTimer += Time.deltaTime;
-        if (slideTimer >= slideDuration)
+        if (slideTimer >= slideDuration && currentSlideIndex < slides.Length - 1)
         {
+            currentSlideIndex++;
             currentSlide.gameObject.SetActive(false);
-            int nextSlideIndex = (System.Array.IndexOf(slides, currentSlide) + 1) % slides.Length;
-            currentSlide = slides[nextSlideIndex];
+            currentSlide = slides[currentSlideIndex];
             currentSlide.gameObject.SetActive(true);
             slideTimer = 0f;
         }
+        if (currentSlideIndex >= slides.Length)
+        {
+            //call other scene and destroy this scene
+            SceneManager.LoadScene("GameSceneTest");
+            Destroy(this.gameObject);
+        }
     }
+
 }
