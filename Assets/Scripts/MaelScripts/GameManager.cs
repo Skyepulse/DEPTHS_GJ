@@ -346,6 +346,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Entering room: " + roomIndex);
         // Close doors for the current room
         MapGenerator.Instance.CloseDoors(roomIndex);
+        if (_playerController != null)
+        {
+            _playerController.PlayCloseDoor();
+        }
 
         // Spawn enemies TODO
     }
