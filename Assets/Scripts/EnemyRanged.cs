@@ -130,17 +130,17 @@ public class EnemyRanged : Enemy
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, playerPosition - (Vector2)transform.position, detectRange, LayerMask.GetMask("Obstacle"));
 
-            /* if (hit.collider != null)
-             {
-                 // If the raycast hits an obstacle, do not attack
-                 //Debug.Log("Obstacle detected in between");
-                 //move toward a perpendicular point
-                 Vector2 perpendicularPoint = hit.point + (Vector2)hit.normal * 0.5f;
-                 moveTo(perpendicularPoint);
+            if (hit.collider != null)
+            {
+                // If the raycast hits an obstacle, do not attack
+                //Debug.Log("Obstacle detected in between");
+                //move toward a perpendicular point
+                Vector2 perpendicularPoint = hit.point + (Vector2)hit.normal * 0.5f;
+                moveTo(perpendicularPoint);
 
 
-                 return;
-             }*/
+                return;
+            }
 
             float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
