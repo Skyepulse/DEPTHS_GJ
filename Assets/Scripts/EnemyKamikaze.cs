@@ -109,8 +109,7 @@ public class EnemyKamikaze : Enemy
 
         // Optional: delay before destruction to show explosion
         Destroy(gameObject, explodeDelay);
-
-
+        OnEnemyDeath(this); // Notify that the enemy has died
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
+    public static UnityAction<Enemy> onEnemyDeath;
     [SerializeField] private float maxHealth = 10;
     [SerializeField] private ValueBar healthBar;
 
@@ -9,6 +11,12 @@ public class Enemy : MonoBehaviour
 
     //================================//
     public float Health => health;
+
+    //================================//
+    public void OnEnemyDeath(Enemy enemy)
+    {
+        onEnemyDeath?.Invoke(enemy);
+    }
 
     //================================//
     protected virtual void Awake()
@@ -53,6 +61,7 @@ public class Enemy : MonoBehaviour
     {
         // Handle enemy death logic here
         Debug.Log(this.gameObject.name + " has died!");
+        OnEnemyDeath(this);
         Destroy(gameObject);
     }
 }

@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         [HideInInspector]
         public List<Enemy> enemies;
         public List<GameObject> enemyPrefabs;
+        public int enemyCount;
     }
 
     //================================//
@@ -89,7 +90,18 @@ public class GameManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(gameObject); 
 
-        fullScreenMatReference.SetFloat("_Active", 1f);       
+        fullScreenMatReference.SetFloat("_Active", 1f);      
+
+        Enemy.onEnemyDeath += EnemyDied;
+    }
+
+    //================================//
+    private void EnemyDied(Enemy enemy)
+    {
+        if (enemy == null) return;
+        if (_currentFloor < 0 || _currentFloor >= dungeonFloors.Length) return;
+        dungeonFloors[_currentFloor].enemies.Remove(enemy);
+        dungeonFloors[_currentFloor].enemyCount--;
     }
 
     //================================//
@@ -270,6 +282,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(_instance.gameObject);
             _instance = null;
+
+            Enemy.onEnemyDeath -= _instance.EnemyDied;
         }
     }
 
@@ -384,6 +398,7 @@ public class GameManager : MonoBehaviour
                         if (enemyComponent != null)
                         {
                             dungeonFloors[_currentFloor].enemies.Add(enemyComponent);
+                            dungeonFloors[_currentFloor].enemyCount++;
                         }
                         else
                         {
