@@ -54,6 +54,16 @@ private static MapGenerator _instance;
         public Room.Door doorOut;
     }
 
+    public RoomNode GetRoomNode(int index)
+    {
+        if (index < 0 || index >= roomNodes.Length)
+        {
+            Debug.LogError("Invalid room index: " + index);
+            return default;
+        }
+        return roomNodes[index];
+    }
+
     private Direction GetOppositeDirection(Direction direction)
     {
         if (direction == Direction.None)
@@ -194,8 +204,12 @@ private static MapGenerator _instance;
         // Set the doorOut tunnel of each room to open
         for (int i = 0; i < _numRooms; i++) 
         {
-            roomNodes[i].doorIn?.tunnel?.SetState(Tunnel.State.Open);
-            roomNodes[i].doorOut?.tunnel?.SetState(Tunnel.State.Open);
+            if (roomNodes[i].doorOut == null)
+                Debug.LogWarning("DoorOut is null for room index: " + i);
+            else if (roomNodes[i].doorOut.tunnel == null)
+                Debug.LogWarning("Tunnel is null for room index: " + i);
+            else
+                roomNodes[i].doorOut?.tunnel?.SetState(Tunnel.State.Open);
         }
 
         // Place end trigger in the last room
@@ -269,11 +283,8 @@ private static MapGenerator _instance;
             return;
         }
 
-        RoomNode roomNode = roomNodes[roomIndex];
-        if (roomNode.room != null)
-        {
-            roomNode.doorIn?.tunnel?.SetState(Tunnel.State.Closed);
-        }
+        roomNodes[roomIndex].doorOut?.tunnel?.SetState(Tunnel.State.Closed);
+        
         if(roomIndex > 0) {
             roomNodes[roomIndex - 1].doorOut?.tunnel?.SetState(Tunnel.State.Closed);
         }

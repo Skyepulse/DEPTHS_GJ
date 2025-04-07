@@ -145,10 +145,10 @@ public class Room : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+    {   
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            GameManager.Instance.EnterRoom(RoomIndex);
+            GameManager.Instance.SetCurrentRoom(RoomIndex);
         }
     }
 
