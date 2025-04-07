@@ -13,6 +13,8 @@ public class EnemyTank : Enemy
 
     [SerializeField] private CircleCollider2D FieldOfView;
 
+    [SerializeField] private GameObject VisualNode;
+
     //================================//
     public int Damage => damage;
     public float Speed => speed;
@@ -27,12 +29,21 @@ public class EnemyTank : Enemy
 
     private Collider2D lastCollision;
     private bool playerVisible = false;
+
     //================================//
     void Start()
     {
         // Initialize the enemy
         FieldOfView = GetComponent<CircleCollider2D>();
         FieldOfView.radius = detectRange;
+    }
+
+    private void Awake()
+    {
+        if (VisualNode == null)
+        {
+            VisualNode = transform.GetChild(0).gameObject;
+        }
     }
 
     //================================//
@@ -86,18 +97,21 @@ public class EnemyTank : Enemy
 
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+        VisualNode.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
 
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-        if (distanceToTarget <= attackRange / 2.0f)
+        if (distanceToTarget <= 2.5f)
         {
+            // If the distance is less than or equal to the attack range, stop moving
+            transform.position = transform.position;
             return;
         }
 
 
+
         // Move forwards
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        else { transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); }
     }
 
     //================================//
@@ -108,14 +122,20 @@ public class EnemyTank : Enemy
     {
         // Check if the collided object has the PlayerController component
         PlayerController player = collision.gameObject.transform.parent.GetComponent<PlayerController>();
-        Debug.Log("Collision detected with: " + collision.gameObject.name);
         if (player != null)
         {
-            Debug.Log("Player detected!");
             //get player position
             Vector2 playerPosition = player.transform.position;
             //check if player is in range
             moveTo(playerPosition);
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, playerPosition - (Vector2)transform.position, detectRange, LayerMask.GetMask("Obstacle"));
+            if (hit.collider != null)
+            {
+                // If the raycast hits an obstacle, do not attack
+                Debug.Log("Obstacle detected in between");
+                return;
+            }
 
             float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 

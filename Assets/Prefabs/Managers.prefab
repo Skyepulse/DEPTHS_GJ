@@ -47,6 +47,8 @@ MonoBehaviour:
   electricSpellPrefab: {fileID: 7803615698866579609, guid: 1fbd849a5b4d47c4aa0e75ea0dfe6b7c, type: 3}
   waveSpellPrefab: {fileID: 7803615698866579609, guid: d59a63636fb514045aa2199e4bf2349c, type: 3}
   playerPrefab: {fileID: 2459368729900590824, guid: 667406e9c2a1aa34aa2576346fb1c4fb, type: 3}
+  damageEffectPrefab: {fileID: 7803615698866579609, guid: 7b81569c936d6af458499a9a5998a1f5, type: 3}
+  enemydamageEffectPrefab: {fileID: 7803615698866579609, guid: 63df035690464414bab831935d05381d, type: 3}
 --- !u!1 &6216854491324824141
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class EnemyRanged : Enemy
     [SerializeField] private Attack attackPrefab;
 
     [SerializeField] private CircleCollider2D FieldOfView;
+    [SerializeField] private GameObject VisualNode;
 
     //================================//
     public int Damage => damage;
@@ -36,6 +37,15 @@ public class EnemyRanged : Enemy
         // Initialize the enemy
         FieldOfView = GetComponent<CircleCollider2D>();
         FieldOfView.radius = detectRange;
+    }
+
+
+    private void Awake()
+    {
+        if (VisualNode == null)
+        {
+            VisualNode = transform.GetChild(0).gameObject;
+        }
     }
 
     //================================//
@@ -89,11 +99,10 @@ public class EnemyRanged : Enemy
 
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
-
+        VisualNode.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
         //don't move if close enough
         float distanceToTarget = Vector2.Distance(transform.position, targetPosition);
-        if (distanceToTarget <= attackRangeMin / 2.0f)
+        if (distanceToTarget <= attackRangeMax)
         {
             return;
         }
@@ -111,23 +120,36 @@ public class EnemyRanged : Enemy
     {
         // Check if the collided object has the PlayerController component
         PlayerController player = collision.gameObject.transform.parent.GetComponent<PlayerController>();
-        Debug.Log("Collision detected with: " + collision.gameObject.name);
         if (player != null)
         {
-            Debug.Log("Player detected!");
             //get player position
             Vector2 playerPosition = player.transform.position;
             //check if player is in range
+            //raycast to check if the attack hits an obstacle
 
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, playerPosition - (Vector2)transform.position, detectRange, LayerMask.GetMask("Obstacle"));
+
+            if (hit.collider != null)
+            {
+                // If the raycast hits an obstacle, do not attack
+                Debug.Log("Obstacle detected in between");
+                //move toward a perpendicular point
+                Vector2 perpendicularPoint = hit.point + (Vector2)hit.normal * 0.5f;
+                moveTo(perpendicularPoint);
+
+
+                return;
+            }
 
             float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
-            if (distanceToPlayer > attackRangeMax)
+            if (distanceToPlayer > attackRangeMax - 1.0f)
             {
                 // Move towards the player
                 moveTo(playerPosition);
             }
-            else if (distanceToPlayer < attackRangeMin)
+
+            else if (distanceToPlayer < attackRangeMin + 1.0f)
             {
                 // Move away from the player
                 Vector2 direction = (playerPosition - (Vector2)transform.position).normalized;
