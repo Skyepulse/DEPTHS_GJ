@@ -25,6 +25,7 @@ public class IntroSlides : MonoBehaviour
             slides[i].gameObject.SetActive(false);
         }
         slideTimer = 0f;
+        Debug.Log(slides.Length);
 
     }
 
@@ -33,23 +34,39 @@ public class IntroSlides : MonoBehaviour
     {
         //when all slides done call other scene and destroy this scene
         slideTimer += Time.deltaTime;
-        if (slideTimer >= slideDuration && currentSlideIndex < slides.Length - 1)
+        if (slideTimer >= slideDuration)
         {
-            currentSlideIndex++;
+            nextSlide();
+        }
+
+    }
+
+    private void nextSlide()
+    {
+
+        currentSlideIndex++;
+        Debug.Log("Current slide index: " + currentSlideIndex);
+        Debug.Log("Current slide name " + currentSlide.name);
+        Debug.Log("slides length: " + slides.Length);
+        if (currentSlideIndex < slides.Length)
+        {
             currentSlide.gameObject.SetActive(false);
             currentSlide = slides[currentSlideIndex];
             currentSlide.gameObject.SetActive(true);
             slideTimer = 0f;
+
         }
-        else if (currentSlideIndex == slides.Length - 1)
+        else
         {
             //call other scene and destroy this scene
             Debug.Log("All slides done");
-            // Load the main menu scen
+            // Load the main menu scene
             SceneManager.LoadScene("GameSceneTest");
 
-            Destroy(this.gameObject);
+
         }
+
+
     }
 
 }
