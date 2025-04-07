@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public float Health => health;
 
     //================================//
-    private void Awake()
+    protected virtual void Awake()
     {
         health = maxHealth;
         if (healthBar != null)

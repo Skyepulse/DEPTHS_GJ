@@ -135,7 +135,7 @@ public class Minion : Enemy
             if (hit.collider != null)
             {
                 // If the raycast hits an obstacle, do not attack
-                Debug.Log("Obstacle detected in between");
+                //Debug.Log("Obstacle detected in between");
                 return;
             }
 

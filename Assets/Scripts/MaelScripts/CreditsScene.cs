@@ -7,6 +7,8 @@ public class CreditsScene : MonoBehaviour
     [SerializeField] private string mainMenuSceneName = "MainMenu";
     [SerializeField] private Button backButton = null;
 
+    [SerializeField] private Material fullShaderMaterial = null;
+
     //================================//
     private void Awake()
     {
@@ -17,6 +19,8 @@ public class CreditsScene : MonoBehaviour
         }
 
         backButton.onClick.AddListener(OnBackButtonClicked);
+
+        fullShaderMaterial.SetFloat("_Active", 0f);
     }
 
     //================================//
