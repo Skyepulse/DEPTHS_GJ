@@ -236,6 +236,17 @@ public class GameManager : MonoBehaviour
         GameManager.Destroy();
     }
 
+    private int lastRoomIndex = -1;
+
+    public void SetCurrentRoom(int roomIndex)
+    {
+        if (roomIndex != lastRoomIndex)
+        {
+            lastRoomIndex = roomIndex;
+            EnterRoom(roomIndex);
+        }
+    }
+
     public void EnterRoom(int roomIndex)
     {
         Debug.Log("Entering room: " + roomIndex);
