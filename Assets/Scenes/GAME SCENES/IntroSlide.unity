@@ -1977,7 +1977,8 @@ MonoBehaviour:
   - {fileID: 1498034547}
   - {fileID: 513272002}
   - {fileID: 1885554581}
-  slideDuration: 5
+  slideDuration: 7
+  fullShaderMaterial: {fileID: 2100000, guid: f791d81decc4db94ebccebef7a697f2b, type: 2}
 --- !u!222 &2017980553
 CanvasRenderer:
   m_ObjectHideFlags: 0

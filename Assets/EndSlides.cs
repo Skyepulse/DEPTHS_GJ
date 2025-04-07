@@ -14,6 +14,8 @@ public class EndSlides : MonoBehaviour
     private int currentSlideIndex = 0; //index of the current slide
     private GameObject currentSlide; //the current slide being shown
 
+    [SerializeField] private Material fullShaderMaterial; //the material used for the full screen shader
+
     public float SlideDuration => slideDuration;
     void Start()
     {
@@ -27,6 +29,10 @@ public class EndSlides : MonoBehaviour
         slideTimer = 0f;
         Debug.Log(slides.Length);
 
+        if( fullShaderMaterial != null)
+        {
+            fullShaderMaterial.SetFloat("_Active", 0f);
+        }
     }
 
     // Update is called once per frame

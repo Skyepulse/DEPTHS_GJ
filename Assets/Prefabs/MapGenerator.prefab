@@ -61,6 +61,7 @@ MonoBehaviour:
   - {fileID: 8025420712704762831, guid: ebc37e24e62b6924c97a0946210e302a, type: 3}
   - {fileID: 8025420712704762831, guid: 321641af6ad6b844484bc437886e4f85, type: 3}
   - {fileID: 8025420712704762831, guid: e263d5089d453a04c8401f5a40399f5b, type: 3}
+  - {fileID: 8025420712704762831, guid: 00ea2d86d4f755c49a0b383a19445108, type: 3}
   numRooms: 10
   tunnelPrefab: {fileID: 147510855452115637, guid: ea0a24b12ac8d5f489efb1e4ea3f3572, type: 3}
   endTriggerPrefab: {fileID: 4884183758252731949, guid: 5b258e9a13fe4b347afb675f474e8999, type: 3}
