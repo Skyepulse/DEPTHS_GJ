@@ -394,7 +394,8 @@ MonoBehaviour:
   slides:
   - {fileID: 1450923778}
   - {fileID: 1203029470}
-  slideDuration: 5
+  slideDuration: 9
+  fullShaderMaterial: {fileID: 2100000, guid: f791d81decc4db94ebccebef7a697f2b, type: 2}
 --- !u!1 &703915952
 GameObject:
   m_ObjectHideFlags: 0
