@@ -118,6 +118,7 @@ public class Spell : MonoBehaviour
         }
         else if (collider.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
+            Debug.Log("Spell hit an obstacle!");
             Die();
         }
     }
