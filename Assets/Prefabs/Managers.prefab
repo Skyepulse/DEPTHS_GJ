@@ -1277,7 +1277,7 @@ MonoBehaviour:
   - roomCount: 7
     difficultyLevel: 0
     maxRoomEnemies: 3
-    depthColor: {r: 0.16441198, g: 0.26404634, b: 0.3207547, a: 0}
+    depthColor: {r: 0.31790662, g: 0.48871177, b: 0.59119487, a: 0}
     SpawnPoint: {x: 0, y: 0, z: 0}
     enemies: []
     enemyPrefabs:
@@ -1291,7 +1291,7 @@ MonoBehaviour:
   - {fileID: 936244705, guid: dcecf731b0791d05abc410b4009b0a6b, type: 3}
   - {fileID: -1991776414, guid: dcecf731b0791d05abc410b4009b0a6b, type: 3}
   mainMenuScene: Main Menu Scene
-  creditsScene: CreditsScene
+  creditsScene: EndScene
   tutorial1: {fileID: 2875519156805382090}
   tutorial2: {fileID: 8535368241820716890}
   tutorial3: {fileID: 7025512663731865491}
