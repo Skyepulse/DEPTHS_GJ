@@ -131,14 +131,14 @@ public class Minion : Enemy
             //check if player is in range
             moveTo(playerPosition);
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, playerPosition - (Vector2)transform.position, detectRange, LayerMask.GetMask("Obstacle"));
-            if (hit.collider != null)
-            {
-                // If the raycast hits an obstacle, do not attack
-                //Debug.Log("Obstacle detected in between");
-                return;
-            }
-
+            /*  RaycastHit2D hit = Physics2D.Raycast(transform.position, playerPosition - (Vector2)transform.position, detectRange, LayerMask.GetMask("Obstacle"));
+              if (hit.collider != null)
+              {
+                  // If the raycast hits an obstacle, do not attack
+                  //Debug.Log("Obstacle detected in between");
+                  return;
+              }
+  */
             float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
             if (distanceToPlayer <= attackRange && coolDownOver)
