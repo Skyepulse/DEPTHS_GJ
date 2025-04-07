@@ -2261,11 +2261,11 @@ MonoBehaviour:
   doors:
   - position: {x: 4, y: -2, z: 0}
     direction: 1
-    room: {fileID: 0}
+    room: {fileID: 4899923450294788311}
     tunnel: {fileID: 0}
   - position: {x: -7, y: 0, z: 0}
     direction: 3
-    room: {fileID: 0}
+    room: {fileID: 4899923450294788311}
     tunnel: {fileID: 0}
   spawnPoints:
   - {fileID: 3536208338316208544}
@@ -2278,7 +2278,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8025420712704762831}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
