@@ -61,7 +61,7 @@ Material:
     - _ZoomSpeed: 0.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorAdd: {r: 0.52622515, g: 0.8845708, b: 0.9245283, a: 0}
+    - _ColorAdd: {r: 0.16441198, g: 0.26404634, b: 0.3207547, a: 0}
     - _ColorMult: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
