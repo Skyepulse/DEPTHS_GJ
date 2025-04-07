@@ -244,4 +244,13 @@ private static MapGenerator _instance;
 
         return spawnPoint;
     }
+
+    public static void Destroy()
+    {
+        if (_instance != null)
+        {
+            Destroy(_instance.gameObject);
+            _instance = null;
+        }
+    }
 }

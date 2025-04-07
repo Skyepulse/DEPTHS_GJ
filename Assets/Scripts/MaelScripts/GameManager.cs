@@ -2,6 +2,8 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //================================//
 public class GameManager : MonoBehaviour
@@ -38,6 +40,14 @@ public class GameManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private DungeonFloor[]     dungeonFloors = null;
     [SerializeField] private Material           fullScreenMatReference = null;
+    
+    [Header("Spell Canvas Image")]
+    [SerializeField] private Image              spellCanvasImage;
+    [SerializeField] private Sprite[]           SpellSprites;
+
+    [Header("Scenes")]
+    [SerializeField] private string            mainMenuScene = "Main Menu Scene";
+    [SerializeField] private string            creditsScene = "CreditsScene";
 
 
     //================================//
@@ -45,6 +55,7 @@ public class GameManager : MonoBehaviour
     public PlayerController      Player => _playerController;
     private int                 _currentFloor = 0;
     public int                  CurrentFloor => _currentFloor;
+    private Canvas              _gameCanvas = null;
 
     //================================//
     private void Awake()
@@ -68,6 +79,20 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        _gameCanvas = GetComponent<Canvas>();
+        if (_gameCanvas == null)
+        {
+            Debug.LogError("Game canvas not found please assign one");
+            return;
+        }
+
+        CameraController camera = FindFirstObjectByType<CameraController>();
+        if ( camera == null )
+        {
+            Debug.LogError("Camera Controller not found in the scene");
+        }
+        _gameCanvas.worldCamera = camera.GetComponent<Camera>();
+
         InitializeGame(0);
     }
 
@@ -89,6 +114,7 @@ public class GameManager : MonoBehaviour
     public void OnGameWin()
     {
         Debug.Log("You win the game!");
+        StartCoroutine(CreditsAsync());
     }
 
     //================================//
@@ -162,5 +188,51 @@ public class GameManager : MonoBehaviour
             Destroy(enemy.gameObject);
         }
         dungeonFloors[_currentFloor].enemies.Clear();
+    }
+
+    //================================//
+    public void ChangeSpell(int spell)
+    {
+        spellCanvasImage.sprite = SpellSprites[spell];
+    }
+
+    //================================//
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(mainMenuScene);
+        // Clean all don't destroy on load objects
+        CleanupManagers();
+    }
+
+    //================================//
+    public void GoToCredits()
+    {
+        SceneManager.LoadScene(creditsScene);
+        CleanupManagers();
+    }
+
+    //================================//
+    private IEnumerator CreditsAsync()
+    {
+        yield return new WaitForSeconds(3f);
+        GoToCredits();
+    }
+
+    //================================//
+    public static void Destroy()
+    {
+        if (_instance != null)
+        {
+            Destroy(_instance.gameObject);
+            _instance = null;
+        }
+    }
+
+    //================================//
+    private void CleanupManagers()
+    {
+        PrefabManager.Destroy();
+        MapGenerator.Destroy();
+        GameManager.Destroy();
     }
 }

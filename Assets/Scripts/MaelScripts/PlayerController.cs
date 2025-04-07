@@ -86,6 +86,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+        GameManager.Instance.ChangeSpell(0);
+
         if(PrefabManager.Instance == null){
             Debug.LogError("PrefabManager instance is not present in the scene!");
         }
@@ -214,6 +216,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             castSpellType = (castSpellType + 1) % System.Enum.GetValues(typeof(Spell.eSpellType)).Length;
+            GameManager.Instance.ChangeSpell(castSpellType);
         }
     }
 
