@@ -141,6 +141,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CreditsAsync());
     }
 
+    bool _isDoorsClosed = false;
+
     //================================//
     void Update()
     {
@@ -152,6 +154,15 @@ public class GameManager : MonoBehaviour
                 _tutorialTimer = 0f;
                 if (_currentTutorial == 5) NextTutorial();
             }
+        }
+
+        // If doors are closed and no enemies left, open doors
+        if (_isDoorsClosed && dungeonFloors[_currentFloor].enemies.Count == 0)
+        {
+            MapGenerator.Instance.OpenDoors(lastRoomIndex);
+            if (_playerController != null)
+                _playerController.PlayCloseDoor();
+            _isDoorsClosed = false;
         }
     }
 
@@ -365,7 +376,7 @@ public class GameManager : MonoBehaviour
     //================================//
     public void SpawnEnemies()
     {
-        if (lastRoomIndex > 0)
+        if (lastRoomIndex > 0 && lastRoomIndex < dungeonFloors[_currentFloor].roomCount - 1)
         {
             Room room = MapGenerator.Instance.GetRoomNode(lastRoomIndex).room.GetComponentInChildren<Room>();
             if (room != null)
@@ -404,13 +415,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Entering room: " + roomIndex);
         // Close doors for the current room
-        MapGenerator.Instance.CloseDoors(roomIndex);
-        if (_playerController != null)
-        {
-            _playerController.PlayCloseDoor();
+        if(roomIndex > 0) {
+            MapGenerator.Instance.CloseDoors(roomIndex);
+            if (_playerController != null)
+                _playerController.PlayCloseDoor();
+            _isDoorsClosed = true;
         }
 
-        
         // Spawn enemies TODO
         SpawnEnemies();
     }
