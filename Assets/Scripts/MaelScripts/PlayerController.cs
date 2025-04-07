@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource    mainAudioSource;
     [SerializeField] private AudioSource    damageAudioSource;
     [SerializeField] private AudioSource    attackAudioSource;
+    [SerializeField] private AudioSource    doorAudioSource;
 
     private bool                            isDead = false;
 
@@ -322,5 +323,14 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f); // Wait for the animation to finish
         GameManager.Instance.OnPlayerDeath();
         Destroy(gameObject); // Destroy the player object after the animation
+    }
+
+    //================================//
+    public void PlayCloseDoor()
+    {
+        if (doorAudioSource != null)
+        {
+            doorAudioSource.Play();
+        }
     }
 }
