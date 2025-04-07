@@ -36,6 +36,9 @@ private static MapGenerator _instance;
     [SerializeField]
     private GameObject endTriggerPrefab;
 
+    [SerializeField]
+    private GameObject groundTilemapPrefab;
+
     private RoomNode[] roomNodes;
 
     public enum Direction
@@ -85,6 +88,10 @@ private static MapGenerator _instance;
 
         ClearMap();
         Debug.Log("Generating map...");
+
+        // Place ground tilemap in the first room
+        GameObject groundTilemap = Instantiate(groundTilemapPrefab, Vector3.zero, Quaternion.identity);
+        groundTilemap.transform.SetParent(transform);
 
         GameObject firstRoom = Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], Vector3.zero, Quaternion.identity);
         firstRoom.transform.SetParent(transform);
