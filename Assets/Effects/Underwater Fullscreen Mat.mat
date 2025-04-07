@@ -53,7 +53,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Active: 1
+    - _Active: 0
     - _EnableExternalAlpha: 0
     - _Speed: 0.1
     - _ZWrite: 0
