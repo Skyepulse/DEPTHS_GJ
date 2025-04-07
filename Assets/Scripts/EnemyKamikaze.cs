@@ -28,8 +28,9 @@ public class EnemyKamikaze : Enemy
         FieldOfView.radius = detectRange;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (VisualNode == null)
         {
             VisualNode = transform.GetChild(0).gameObject;

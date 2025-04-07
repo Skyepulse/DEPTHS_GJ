@@ -87,7 +87,9 @@ public class GameManager : MonoBehaviour
         }
 
         _instance = this;
-        DontDestroyOnLoad(gameObject);        
+        DontDestroyOnLoad(gameObject); 
+
+        fullScreenMatReference.SetFloat("_Active", 1f);       
     }
 
     //================================//
@@ -353,6 +355,43 @@ public class GameManager : MonoBehaviour
     }
 
     //================================//
+    public void SpawnEnemies()
+    {
+        if (lastRoomIndex > 0)
+        {
+            Room room = MapGenerator.Instance.GetRoomNode(lastRoomIndex).room.GetComponentInChildren<Room>();
+            if (room != null)
+            {
+                // num of enemies to spawn between 1 and maxRoomEnemies
+                int numEnemies = UnityEngine.Random.Range(1, dungeonFloors[_currentFloor].maxRoomEnemies + 1);
+
+                for( int i = 0; i < numEnemies; i++ )
+                {
+                    GameObject randomEnemyPrefab = dungeonFloors[_currentFloor].enemyPrefabs[UnityEngine.Random.Range(0, dungeonFloors[_currentFloor].enemyPrefabs.Count)];
+                    Transform spawnPosition = room.GetRandomSpawnPoint();
+                    if (spawnPosition != null && randomEnemyPrefab != null)
+                    {
+                        GameObject enemy = Instantiate(randomEnemyPrefab, spawnPosition.position, Quaternion.identity);
+                        Enemy enemyComponent = enemy.GetComponent<Enemy>();
+                        if (enemyComponent != null)
+                        {
+                            dungeonFloors[_currentFloor].enemies.Add(enemyComponent);
+                        }
+                        else
+                        {
+                            Debug.LogError("Enemy prefab does not have an Enemy component!");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("No spawn point found in the room, or enemy is null!");
+                    }
+                }
+            }
+        }
+    }
+
+    //================================//
     public void EnterRoom(int roomIndex)
     {
         Debug.Log("Entering room: " + roomIndex);
@@ -363,6 +402,8 @@ public class GameManager : MonoBehaviour
             _playerController.PlayCloseDoor();
         }
 
+        
         // Spawn enemies TODO
+        SpawnEnemies();
     }
 }
