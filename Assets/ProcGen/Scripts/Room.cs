@@ -16,6 +16,13 @@ public class Room : MonoBehaviour
     public Door[] doors;
     public Transform[] spawnPoints;
 
+    private int _roomIndex = -1;
+    public int RoomIndex
+    {
+        get => _roomIndex;
+        set => _roomIndex = value;
+    }
+
     public GameObject GetPrefab()
     {
         return gameObject;
@@ -135,6 +142,14 @@ public class Room : MonoBehaviour
 
         int randomIndex = Random.Range(0, spawnPoints.Length);
         return spawnPoints[randomIndex];
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            GameManager.Instance.EnterRoom(RoomIndex);
+        }
     }
 
 }

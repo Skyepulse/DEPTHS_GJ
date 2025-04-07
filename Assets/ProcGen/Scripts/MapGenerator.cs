@@ -78,6 +78,7 @@ private static MapGenerator _instance;
 
         GameObject firstRoom = Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], Vector3.zero, Quaternion.identity);
         firstRoom.transform.SetParent(transform);
+        firstRoom.GetComponent<Room>().RoomIndex = 0;
 
         roomNodes = new RoomNode[_numRooms];
         roomNodes[0].room = firstRoom;
@@ -151,6 +152,7 @@ private static MapGenerator _instance;
                 // Instantiate the new room prefab at the calculated position
                 GameObject room = Instantiate(newDoorIn.room.GetPrefab(), spawnPosition, Quaternion.identity);
                 room.transform.SetParent(transform);
+                room.GetComponent<Room>().RoomIndex = i;
 
                 roomNodes[i] = new RoomNode
                 {
@@ -189,11 +191,11 @@ private static MapGenerator _instance;
             }
         }
 
-        // Set the doorOut tunnel of each room to closed
+        // Set the doorOut tunnel of each room to open
         for (int i = 0; i < _numRooms; i++) 
         {
-            roomNodes[i].doorIn?.tunnel?.SetState(Tunnel.State.Closed);
-            roomNodes[i].doorOut?.tunnel?.SetState(Tunnel.State.Closed);
+            roomNodes[i].doorIn?.tunnel?.SetState(Tunnel.State.Open);
+            roomNodes[i].doorOut?.tunnel?.SetState(Tunnel.State.Open);
         }
 
         // Place end trigger in the last room
@@ -249,5 +251,31 @@ private static MapGenerator _instance;
         spawnPoint.z = 0;
 
         return spawnPoint;
+    }
+
+    public static void Destroy()
+    {
+        if (_instance != null)
+        {
+            Destroy(_instance.gameObject);
+            _instance = null;
+        }
+    }
+
+    public void CloseDoors(int roomIndex) {
+        if (roomIndex < 0 || roomIndex >= roomNodes.Length)
+        {
+            Debug.LogError("Invalid room index: " + roomIndex);
+            return;
+        }
+
+        RoomNode roomNode = roomNodes[roomIndex];
+        if (roomNode.room != null)
+        {
+            roomNode.doorIn?.tunnel?.SetState(Tunnel.State.Closed);
+        }
+        if(roomIndex > 0) {
+            roomNodes[roomIndex - 1].doorOut?.tunnel?.SetState(Tunnel.State.Closed);
+        }
     }
 }

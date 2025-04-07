@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 // Singleton class to manage prefabs
@@ -40,6 +41,16 @@ public class PrefabManager : MonoBehaviour
         if (electricSpellPrefab == null || waveSpellPrefab == null || playerPrefab == null)
         {
             Debug.LogError("One or more prefabs are not assigned in the PrefabManager!");
+        }
+    }
+
+    //================================//
+    public static void Destroy()
+    {
+        if (Instance != null)
+        {
+            Destroy(Instance.gameObject);
+            Instance = null;
         }
     }
 }
