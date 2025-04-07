@@ -341,6 +341,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //================================//
     public void EnterRoom(int roomIndex)
     {
         Debug.Log("Entering room: " + roomIndex);
