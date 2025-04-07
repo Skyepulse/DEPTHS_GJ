@@ -3013,7 +3013,7 @@ GameObject:
   - component: {fileID: 3217563003569366993}
   - component: {fileID: 4899923450294788311}
   - component: {fileID: 7297839768417065041}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: RoomLou02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
