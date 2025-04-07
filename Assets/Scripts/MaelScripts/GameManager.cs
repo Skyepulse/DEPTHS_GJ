@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 //================================//
 public class GameManager : MonoBehaviour
@@ -46,8 +47,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite[]           SpellSprites;
 
     [Header("Scenes")]
-    [SerializeField] private string            mainMenuScene = "Main Menu Scene";
-    [SerializeField] private string            creditsScene = "CreditsScene";
+    [SerializeField] private string             mainMenuScene = "Main Menu Scene";
+    [SerializeField] private string             creditsScene = "CreditsScene";
+
+    [Header("Tutorial")]
+    [SerializeField] private GameObject         tutorial1 = null;
+    [SerializeField] private GameObject         tutorial2 = null;
+    [SerializeField] private GameObject         tutorial3 = null;
+    [SerializeField] private GameObject         tutorial4 = null;
+    [SerializeField] private GameObject         tutorial5 = null;
+    private int                                 _currentTutorial = 0;
+    private float                               _tutorialTime = 2f;
+    private float                               _finalTutorialTimeMax = 5f;
+    private float                               _tutorialTimer = 0f;
+    public int GetCurrentTutorial()
+    {
+        if (_tutorialTimer > 0f)
+        {
+            return -1;
+        }
+        return _currentTutorial;
+    }
 
 
     //================================//
@@ -93,6 +113,7 @@ public class GameManager : MonoBehaviour
         }
         _gameCanvas.worldCamera = camera.GetComponent<Camera>();
 
+        NextTutorial();
         InitializeGame(0);
     }
 
@@ -115,6 +136,20 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("You win the game!");
         StartCoroutine(CreditsAsync());
+    }
+
+    //================================//
+    void Update()
+    {
+        if (_tutorialTimer > 0f)
+        {
+            _tutorialTimer -= Time.deltaTime;
+            if (_tutorialTimer <= 0f)
+            {
+                _tutorialTimer = 0f;
+                if (_currentTutorial == 5) NextTutorial();
+            }
+        }
     }
 
     //================================//
@@ -176,7 +211,7 @@ public class GameManager : MonoBehaviour
     //================================//
     private IEnumerator RespawnAfterDelay()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         InitializeGame(_currentFloor);
     }
 
@@ -234,5 +269,88 @@ public class GameManager : MonoBehaviour
         PrefabManager.Destroy();
         MapGenerator.Destroy();
         GameManager.Destroy();
+    }
+
+    //================================//
+    public void NextTutorial()
+    {
+        TMP_Text text = null;
+        switch (_currentTutorial)
+        {
+            case 1:
+                text = tutorial1.GetComponentInChildren<TMP_Text>();
+                text.color = Color.green;
+                break;
+            case 2:
+                text = tutorial2.GetComponentInChildren<TMP_Text>();
+                text.color = Color.green;
+                break;
+            case 3:
+                text = tutorial3.GetComponentInChildren<TMP_Text>();
+                text.color = Color.green;
+                break;
+            case 4:
+                text = tutorial4.GetComponentInChildren<TMP_Text>();
+                text.color = Color.green;
+                break;
+        }
+
+        if (_currentTutorial < 5)
+        {
+            _currentTutorial++;
+            StartCoroutine(ShowTutorial(_currentTutorial));
+            if(_currentTutorial < 4 )_tutorialTimer = _tutorialTime;
+            else _tutorialTimer = _finalTutorialTimeMax;
+        }
+        else
+        {
+            tutorial1.SetActive(false);
+            tutorial2.SetActive(false);
+            tutorial3.SetActive(false);
+            tutorial4.SetActive(false);
+            tutorial5.SetActive(false);
+        }
+    }
+
+    //================================//
+    private IEnumerator ShowTutorial(int i, float time = 2f)
+    {
+        //Wait 2s
+        yield return new WaitForSeconds(time);
+        switch (i)
+        {
+            case 1:
+                tutorial1.SetActive(true);
+                break;
+            case 2:
+                tutorial1.SetActive(false);
+                tutorial2.SetActive(true);
+                break;
+            case 3:
+                tutorial2.SetActive(false);
+                tutorial3.SetActive(true);
+                break;
+            case 4:
+                tutorial3.SetActive(false);
+                tutorial4.SetActive(true);
+                break;
+            case 5:
+                tutorial4.SetActive(false);
+                tutorial5.SetActive(true);
+                break;
+        }
+    }
+
+    public void EnterRoom(int roomIndex)
+    {
+        Debug.Log("Entering room: " + roomIndex);
+        // Close doors for the current room
+        MapGenerator.Instance.CloseDoors(roomIndex);
+        if (_playerController != null)
+        {
+            _playerController.PlayCloseDoor();
+        }
+
+        // Spawn enemies TODO
     }
 }
