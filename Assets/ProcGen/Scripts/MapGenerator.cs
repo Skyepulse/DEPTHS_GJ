@@ -110,9 +110,15 @@ private static MapGenerator _instance;
             {
                 attempts++;
 
-                List<Room.Door> newRoomDoorCandidates = roomNodes[i - 1].doorIn.room.GetComponent<Room>().GetDoorPositions(roomNodes[i - 1].doorIn.direction, true);
+                List<Room.Door> newRoomDoorCandidates = roomNodes[i - 1].doorIn.room.GetDoorPositions(roomNodes[i - 1].doorIn.direction, true);
 
-                roomNodes[i - 1].doorOut = newRoomDoorCandidates[Random.Range(0, newRoomDoorCandidates.Count)];
+                Room.Door newDoorOut = newRoomDoorCandidates[Random.Range(0, newRoomDoorCandidates.Count)];
+                roomNodes[i - 1].doorOut = new Room.Door
+                {
+                    position = newDoorOut.position,
+                    direction = newDoorOut.direction,
+                    room = roomNodes[i - 1].room.GetComponent<Room>()
+                };
 
                 Direction roomDirection = GetOppositeDirection(roomNodes[i - 1].doorOut.direction);
 
@@ -164,11 +170,8 @@ private static MapGenerator _instance;
                 room.transform.SetParent(transform);
                 room.GetComponent<Room>().RoomIndex = i;
 
-                roomNodes[i] = new RoomNode
-                {
-                    room = room,
-                    doorIn = newDoorIn
-                };
+                roomNodes[i].room = room;
+                roomNodes[i].doorIn = newDoorIn;
             }
 
             if (!roomFound) return;
@@ -177,11 +180,14 @@ private static MapGenerator _instance;
         // Place tunnels between rooms
         for (int i = 0; i < _numRooms; i++)
         {
-            List<Room.Door> doors = roomNodes[i].room.GetComponent<Room>().GetDoors();
-            for (int j = 0; j < doors.Count; j++)
+            Room.Door[] doors = roomNodes[i].room.GetComponent<Room>().doors;
+            for (int j = 0; j < doors.Length; j++)
             {
                 Room.Door door = doors[j];
                 if (roomNodes[i].doorIn.position == door.position) continue; // Skip if the door is the same as the doorIn
+
+                if(roomNodes[i].doorOut?.position == door.position)
+                    roomNodes[i].room.GetComponent<Room>().doors[j] = roomNodes[i].doorOut;
 
                 Vector3 localPosition = new Vector3(door.position.x, door.position.y, 0) + roomNodes[i].room.transform.position;
                 Vector3Int spawnPosition = Vector3Int.FloorToInt(localPosition);
@@ -192,7 +198,8 @@ private static MapGenerator _instance;
                 {
                     tunnelComponent.Direction = door.direction;
                     tunnelComponent.SetState((roomNodes[i].doorOut?.position == door.position) ? Tunnel.State.Closed : Tunnel.State.Wall);
-                    door.tunnel = tunnelComponent;
+                    
+                    roomNodes[i].room.GetComponent<Room>().doors[j].tunnel = tunnelComponent;
                 }
                 else
                 {
@@ -204,12 +211,7 @@ private static MapGenerator _instance;
         // Set the doorOut tunnel of each room to open
         for (int i = 0; i < _numRooms; i++) 
         {
-            if (roomNodes[i].doorOut == null)
-                Debug.LogWarning("DoorOut is null for room index: " + i);
-            else if (roomNodes[i].doorOut.tunnel == null)
-                Debug.LogWarning("Tunnel is null for room index: " + i);
-            else
-                roomNodes[i].doorOut?.tunnel?.SetState(Tunnel.State.Open);
+            roomNodes[i].doorOut?.tunnel?.SetState(Tunnel.State.Open);
         }
 
         // Place end trigger in the last room

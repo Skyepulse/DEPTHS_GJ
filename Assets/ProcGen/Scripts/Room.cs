@@ -43,18 +43,6 @@ public class Room : MonoBehaviour
         return doorsCandidates;
     }
 
-    public List<Door> GetDoors()
-    {
-        List<Door> doorsCandidates = new();
-
-        foreach (var door in doors)
-        {
-            doorsCandidates.Add(door);
-        }
-
-        return doorsCandidates;
-    }
-
     private BoundsInt GetBounds(Tilemap tilemap)
     {
 
