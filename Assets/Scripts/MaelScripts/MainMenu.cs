@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor.Rendering.Fullscreen.ShaderGraph;
 
 public class MainMenu : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private float followSpeed = 10f;
 
     [SerializeField] private Camera uiCamera;
+    [SerializeField] private Material fullShaderMaterial;
 
     //================================//
     private void Awake()
@@ -41,6 +43,8 @@ public class MainMenu : MonoBehaviour
         playButton.onClick.AddListener(OnPlayButtonClicked);
         exitButton.onClick.AddListener(OnExitButtonClicked);
         creditButton.onClick.AddListener(OnCreditButtonClicked);
+
+        fullShaderMaterial.SetFloat("_Active", 0f);
     }
 
     //================================//

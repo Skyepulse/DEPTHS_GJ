@@ -38,8 +38,9 @@ public class EnemyTank : Enemy
         FieldOfView.radius = detectRange;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (VisualNode == null)
         {
             VisualNode = transform.GetChild(0).gameObject;
@@ -133,7 +134,7 @@ public class EnemyTank : Enemy
             if (hit.collider != null)
             {
                 // If the raycast hits an obstacle, do not attack
-                Debug.Log("Obstacle detected in between");
+                //Debug.Log("Obstacle detected in between");
                 return;
             }
 

@@ -526,7 +526,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1478341488, guid: dcecf731b0791d05abc410b4009b0a6b, type: 3}
+  m_Sprite: {fileID: 936244705, guid: dcecf731b0791d05abc410b4009b0a6b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1253,12 +1253,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659e88d34cfa7c44294f76f65c1728ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonFloors: []
+  dungeonFloors:
+  - roomCount: 3
+    difficultyLevel: 1
+    maxRoomEnemies: 2
+    depthColor: {r: 0.5892963, g: 0.94271684, b: 0.9811321, a: 0}
+    SpawnPoint: {x: 0, y: 0, z: 0}
+    enemies: []
+    enemyPrefabs:
+    - {fileID: 8082930247907443742, guid: d7ca943379af7bb76b9338581263c8e6, type: 3}
+    - {fileID: 7382120335312931305, guid: 91fe89f25b7da3070aa08369ecdd8a22, type: 3}
+  - roomCount: 5
+    difficultyLevel: 2
+    maxRoomEnemies: 2
+    depthColor: {r: 0.369922, g: 0.70440245, b: 0.65757513, a: 0}
+    SpawnPoint: {x: 0, y: 0, z: 0}
+    enemies: []
+    enemyPrefabs:
+    - {fileID: 2685350763144269256, guid: 80d420d8fb1954330a5980fb9f1a362d, type: 3}
+    - {fileID: 4582419596180668011, guid: ee8ea5430f80981909fa8500acd10d87, type: 3}
+    - {fileID: 8082930247907443742, guid: d7ca943379af7bb76b9338581263c8e6, type: 3}
+    - {fileID: 7382120335312931305, guid: 91fe89f25b7da3070aa08369ecdd8a22, type: 3}
+  - roomCount: 7
+    difficultyLevel: 0
+    maxRoomEnemies: 3
+    depthColor: {r: 0.16441198, g: 0.26404634, b: 0.3207547, a: 0}
+    SpawnPoint: {x: 0, y: 0, z: 0}
+    enemies: []
+    enemyPrefabs:
+    - {fileID: 2685350763144269256, guid: 80d420d8fb1954330a5980fb9f1a362d, type: 3}
+    - {fileID: 4582419596180668011, guid: ee8ea5430f80981909fa8500acd10d87, type: 3}
+    - {fileID: 8082930247907443742, guid: d7ca943379af7bb76b9338581263c8e6, type: 3}
+    - {fileID: 7382120335312931305, guid: 91fe89f25b7da3070aa08369ecdd8a22, type: 3}
   fullScreenMatReference: {fileID: 2100000, guid: f791d81decc4db94ebccebef7a697f2b, type: 2}
   spellCanvasImage: {fileID: 5953696996102000059}
   SpellSprites:
-  - {fileID: 103066576, guid: dcecf731b0791d05abc410b4009b0a6b, type: 3}
-  - {fileID: 1125321008, guid: dcecf731b0791d05abc410b4009b0a6b, type: 3}
+  - {fileID: 936244705, guid: dcecf731b0791d05abc410b4009b0a6b, type: 3}
+  - {fileID: -1991776414, guid: dcecf731b0791d05abc410b4009b0a6b, type: 3}
   mainMenuScene: Main Menu Scene
   creditsScene: CreditsScene
   tutorial1: {fileID: 2875519156805382090}
