@@ -53,6 +53,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Active: 1
     - _EnableExternalAlpha: 0
     - _Speed: 0.1
     - _ZWrite: 0
@@ -60,7 +61,7 @@ Material:
     - _ZoomSpeed: 0.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorAdd: {r: 0.45817015, g: 0.9811321, b: 0.89046586, a: 0}
+    - _ColorAdd: {r: 0.52622515, g: 0.8845708, b: 0.9245283, a: 0}
     - _ColorMult: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

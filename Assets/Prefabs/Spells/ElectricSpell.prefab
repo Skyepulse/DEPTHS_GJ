@@ -197,5 +197,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellDurationVal: 4
-  spellDamageVal: 5
+  spellDamageVal: 15
   spellCostVal: 10

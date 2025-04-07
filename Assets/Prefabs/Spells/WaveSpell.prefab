@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellDurationVal: 20
-  spellDamageVal: 2
+  spellDamageVal: 6
   spellCostVal: 2
   speed: 3.5
   effect: {fileID: 262705266690267415}

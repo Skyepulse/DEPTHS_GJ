@@ -40,8 +40,9 @@ public class EnemyRanged : Enemy
     }
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (VisualNode == null)
         {
             VisualNode = transform.GetChild(0).gameObject;
@@ -132,7 +133,7 @@ public class EnemyRanged : Enemy
             if (hit.collider != null)
             {
                 // If the raycast hits an obstacle, do not attack
-                Debug.Log("Obstacle detected in between");
+                //Debug.Log("Obstacle detected in between");
                 //move toward a perpendicular point
                 Vector2 perpendicularPoint = hit.point + (Vector2)hit.normal * 0.5f;
                 moveTo(perpendicularPoint);
