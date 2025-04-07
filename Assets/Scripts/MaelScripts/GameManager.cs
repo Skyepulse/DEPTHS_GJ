@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
     // METHODS
     public void OnFloorWin()
     {
+        CleanupEnemies();
         _currentFloor++;
         if (_currentFloor >= dungeonFloors.Length)
         {
@@ -220,8 +221,15 @@ public class GameManager : MonoBehaviour
     //================================//
     public void CleanupEnemies()
     {
+        if (_currentFloor < 0 || _currentFloor >= dungeonFloors.Length)
+        {
+            Debug.LogError("Current floor index is out of bounds!");
+            return;
+        }
+
         foreach( Enemy enemy in dungeonFloors[_currentFloor].enemies )
         {
+            if (enemy == null) continue;
             Destroy(enemy.gameObject);
         }
         dungeonFloors[_currentFloor].enemies.Clear();

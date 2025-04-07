@@ -41,6 +41,8 @@ public class EnemyKamikaze : Enemy
     {
         base.Update();
 
+        if (hasExploded) return; // Stop updating if already exploded
+
         if (playerVisible && lastCollision != null && !hasExploded)
         {
             DoWhenCollision(lastCollision);
