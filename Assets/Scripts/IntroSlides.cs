@@ -14,6 +14,8 @@ public class IntroSlides : MonoBehaviour
     private int currentSlideIndex = 0; //index of the current slide
     private GameObject currentSlide; //the current slide being shown
 
+    [SerializeField] private Material fullShaderMaterial; //the material used for the full screen shader
+
     public float SlideDuration => slideDuration;
     void Start()
     {
@@ -25,7 +27,12 @@ public class IntroSlides : MonoBehaviour
             slides[i].gameObject.SetActive(false);
         }
         slideTimer = 0f;
+        Debug.Log(slides.Length);
 
+        if( fullShaderMaterial != null)
+        {
+            fullShaderMaterial.SetFloat("_Active", 0f);
+        }
     }
 
     // Update is called once per frame
@@ -33,23 +40,39 @@ public class IntroSlides : MonoBehaviour
     {
         //when all slides done call other scene and destroy this scene
         slideTimer += Time.deltaTime;
-        if (slideTimer >= slideDuration && currentSlideIndex < slides.Length - 1)
+        if (slideTimer >= slideDuration)
         {
-            currentSlideIndex++;
+            nextSlide();
+        }
+
+    }
+
+    private void nextSlide()
+    {
+
+        currentSlideIndex++;
+        Debug.Log("Current slide index: " + currentSlideIndex);
+        Debug.Log("Current slide name " + currentSlide.name);
+        Debug.Log("slides length: " + slides.Length);
+        if (currentSlideIndex < slides.Length)
+        {
             currentSlide.gameObject.SetActive(false);
             currentSlide = slides[currentSlideIndex];
             currentSlide.gameObject.SetActive(true);
             slideTimer = 0f;
+
         }
-        else if (currentSlideIndex == slides.Length - 1)
+        else
         {
             //call other scene and destroy this scene
             Debug.Log("All slides done");
-            // Load the main menu scen
+            // Load the main menu scene
             SceneManager.LoadScene("GameSceneTest");
 
-            Destroy(this.gameObject);
+
         }
+
+
     }
 
 }

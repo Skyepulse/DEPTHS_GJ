@@ -1618,6 +1618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79fd53053cc060f0fb3d181c4af9c1ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yourButton: {fileID: 0}
 --- !u!114 &1274436243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1976,7 +1977,8 @@ MonoBehaviour:
   - {fileID: 1498034547}
   - {fileID: 513272002}
   - {fileID: 1885554581}
-  slideDuration: 5
+  slideDuration: 7
+  fullShaderMaterial: {fileID: 2100000, guid: f791d81decc4db94ebccebef7a697f2b, type: 2}
 --- !u!222 &2017980553
 CanvasRenderer:
   m_ObjectHideFlags: 0

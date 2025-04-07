@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 139100061}
   - component: {fileID: 139100067}
   m_Layer: 5
-  m_Name: IntroCanvas
+  m_Name: EndCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,6 +391,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863facfbcc38f9228ad363c4a4576d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slides:
+  - {fileID: 1450923778}
+  - {fileID: 1203029470}
+  slideDuration: 9
+  fullShaderMaterial: {fileID: 2100000, guid: f791d81decc4db94ebccebef7a697f2b, type: 2}
 --- !u!1 &703915952
 GameObject:
   m_ObjectHideFlags: 0
