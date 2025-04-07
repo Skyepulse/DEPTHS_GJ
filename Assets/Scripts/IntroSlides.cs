@@ -41,10 +41,13 @@ public class IntroSlides : MonoBehaviour
             currentSlide.gameObject.SetActive(true);
             slideTimer = 0f;
         }
-        if (currentSlideIndex >= slides.Length)
+        else if (currentSlideIndex == slides.Length - 1)
         {
             //call other scene and destroy this scene
+            Debug.Log("All slides done");
+            // Load the main menu scen
             SceneManager.LoadScene("GameSceneTest");
+
             Destroy(this.gameObject);
         }
     }
