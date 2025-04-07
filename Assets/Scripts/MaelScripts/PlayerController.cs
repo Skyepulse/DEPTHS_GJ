@@ -173,6 +173,14 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+
+        if( movementInput != Vector2.zero && !isDead)
+        {
+            if (GameManager.Instance != null && GameManager.Instance.GetCurrentTutorial() == 1)
+            {
+                GameManager.Instance.NextTutorial();
+            }
+        }
     }
 
     //================================//
@@ -188,6 +196,10 @@ public class PlayerController : MonoBehaviour
         {
             isSprinting = true;
             isSprintingPressed = true;
+            if (GameManager.Instance != null && GameManager.Instance.GetCurrentTutorial() == 2)
+            {
+                GameManager.Instance.NextTutorial();
+            }
         }
         else if (context.canceled)
         {
@@ -234,6 +246,11 @@ public class PlayerController : MonoBehaviour
         {
             castSpellType = (castSpellType + 1) % System.Enum.GetValues(typeof(Spell.eSpellType)).Length;
             GameManager.Instance.ChangeSpell(castSpellType);
+
+            if (GameManager.Instance != null && GameManager.Instance.GetCurrentTutorial() == 4)
+            {
+                GameManager.Instance.NextTutorial();
+            }
         }
     }
 
@@ -252,6 +269,11 @@ public class PlayerController : MonoBehaviour
                 Instantiate(PrefabManager.Instance.WaveSpell, attackPoint.position, Quaternion.identity);
                 VisualNode.GetComponent<SpriteAnimator>().SetAttackFlag();
                 break;
+        }
+
+        if (GameManager.Instance != null && GameManager.Instance.GetCurrentTutorial() == 3)
+        {
+            GameManager.Instance.NextTutorial();
         }
     }
 
