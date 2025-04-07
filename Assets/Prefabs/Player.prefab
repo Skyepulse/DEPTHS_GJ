@@ -617,10 +617,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   sprintMult: 2.5
-  maxHealth: 25
+  maxHealth: 30
   maxMana: 30
   maxStamina: 50
-  manaRefillRate: 1
+  manaRefillRate: 3
   VisualNode: {fileID: 1168766909228251754}
   healthBar: {fileID: 3382440968946041332}
   manaBar: {fileID: 4780132950284867460}
