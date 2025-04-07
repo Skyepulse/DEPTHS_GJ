@@ -235,4 +235,13 @@ public class GameManager : MonoBehaviour
         MapGenerator.Destroy();
         GameManager.Destroy();
     }
+
+    public void EnterRoom(int roomIndex)
+    {
+        Debug.Log("Entering room: " + roomIndex);
+        // Close doors for the current room
+        MapGenerator.Instance.CloseDoors(roomIndex);
+
+        // Spawn enemies TODO
+    }
 }
