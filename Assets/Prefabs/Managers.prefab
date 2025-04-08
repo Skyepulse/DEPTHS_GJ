@@ -1272,9 +1272,9 @@ MonoBehaviour:
     enemies: []
     enemyPrefabs:
     - {fileID: 2685350763144269256, guid: 80d420d8fb1954330a5980fb9f1a362d, type: 3}
-    - {fileID: 4582419596180668011, guid: ee8ea5430f80981909fa8500acd10d87, type: 3}
     - {fileID: 8082930247907443742, guid: d7ca943379af7bb76b9338581263c8e6, type: 3}
     - {fileID: 7382120335312931305, guid: 91fe89f25b7da3070aa08369ecdd8a22, type: 3}
+    - {fileID: 4582419596180668011, guid: ee8ea5430f80981909fa8500acd10d87, type: 3}
     enemyCount: 0
   - roomCount: 7
     difficultyLevel: 0
@@ -1284,9 +1284,9 @@ MonoBehaviour:
     enemies: []
     enemyPrefabs:
     - {fileID: 2685350763144269256, guid: 80d420d8fb1954330a5980fb9f1a362d, type: 3}
-    - {fileID: 4582419596180668011, guid: ee8ea5430f80981909fa8500acd10d87, type: 3}
     - {fileID: 8082930247907443742, guid: d7ca943379af7bb76b9338581263c8e6, type: 3}
     - {fileID: 7382120335312931305, guid: 91fe89f25b7da3070aa08369ecdd8a22, type: 3}
+    - {fileID: 4582419596180668011, guid: ee8ea5430f80981909fa8500acd10d87, type: 3}
     enemyCount: 0
   fullScreenMatReference: {fileID: 2100000, guid: f791d81decc4db94ebccebef7a697f2b, type: 2}
   spellCanvasImage: {fileID: 5953696996102000059}
