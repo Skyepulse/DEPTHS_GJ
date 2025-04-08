@@ -101,13 +101,14 @@ public class EnemyKamikaze : Enemy
         hasExploded = true;
 
         // Deal damage
-        attack();
+
 
         // Play explosion effect
         if (explosionEffect != null)
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
+        attack((Vector2)player.transform.position);
 
         // Optional: delay before destruction to show explosion
         Destroy(gameObject, explodeDelay);
@@ -144,12 +145,13 @@ public class EnemyKamikaze : Enemy
         }
     }
 
-    private void attack()
+    private void attack(Vector2 targetPosition)
     {
-        Attack attack = Instantiate(bombAttack, this.transform.position, Quaternion.identity);
+        Attack attack = Instantiate(bombAttack, targetPosition, Quaternion.identity);
         attack.SetDamage(damage);
         attack.SetLifetime(explodeDelay);
-        attack.SetDestination(transform.position);
+        attack.SetDestination(targetPosition);
+        Debug.Log("kamikaze attacked");
     }
 
 

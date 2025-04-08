@@ -117,7 +117,7 @@ MonoBehaviour:
   speed: 8
   attackRange: 1.5
   detectRange: 6
-  explodeDelay: 0.1
+  explodeDelay: 0.3
   explodeCountdown: 2
   explosionEffect: {fileID: 6069308252051057241, guid: 83c0af3ec9808274eb19d06255bfe583, type: 3}
   FieldOfView: {fileID: 7535932209554524979}

@@ -39,7 +39,9 @@ public class Attack : MonoBehaviour
             lifetime -= Time.deltaTime;
             if (lifetime <= 0)
             {
+                Debug.Log("Attack object destroyed");
                 Destroy(gameObject);
+
             }
         }
     }
