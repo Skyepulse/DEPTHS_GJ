@@ -12,6 +12,15 @@ public class Eggs : Enemy
         timer = hatchTime;
     }
 
+    override public void Awake()
+    {
+        base.Awake();
+        if (minionPrefab == null)
+        {
+            Debug.LogError("Minion prefab is not assigned in the inspector.");
+        }
+    }
+
     override public void Update()
     {
         base.Update();
