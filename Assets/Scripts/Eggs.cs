@@ -12,7 +12,7 @@ public class Eggs : Enemy
         timer = hatchTime;
     }
 
-    override public void Awake()
+    protected override void Awake()
     {
         base.Awake();
         if (minionPrefab == null)
