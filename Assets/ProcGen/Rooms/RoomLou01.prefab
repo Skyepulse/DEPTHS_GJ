@@ -2379,19 +2379,19 @@ MonoBehaviour:
   doors:
   - position: {x: 12, y: 1, z: 0}
     direction: 1
-    room: {fileID: 0}
+    room: {fileID: 4899923450294788311}
     tunnel: {fileID: 0}
   - position: {x: 7, y: -8, z: 0}
     direction: 2
-    room: {fileID: 0}
+    room: {fileID: 4899923450294788311}
     tunnel: {fileID: 0}
   - position: {x: -9, y: -1, z: 0}
     direction: 3
-    room: {fileID: 0}
+    room: {fileID: 4899923450294788311}
     tunnel: {fileID: 0}
   - position: {x: 0, y: 4, z: 0}
     direction: 0
-    room: {fileID: 0}
+    room: {fileID: 4899923450294788311}
     tunnel: {fileID: 0}
   spawnPoints:
   - {fileID: 5453215231061288107}
