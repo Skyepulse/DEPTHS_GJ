@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
-using UnityEditor.Rendering.Fullscreen.ShaderGraph;
 
 public class MainMenu : MonoBehaviour
 {

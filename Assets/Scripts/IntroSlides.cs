@@ -29,7 +29,7 @@ public class IntroSlides : MonoBehaviour
         slideTimer = 0f;
         Debug.Log(slides.Length);
 
-        if( fullShaderMaterial != null)
+        if (fullShaderMaterial != null)
         {
             fullShaderMaterial.SetFloat("_Active", 0f);
         }

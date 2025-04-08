@@ -91,7 +91,7 @@ public class EnemyTank : Enemy
         //add child attack object to the enemy
         Attack attack = Instantiate(attackPrefab, this.transform.position, Quaternion.identity);
         attack.SetDestination(targetPosition);
-
+        attack.SetDamage(damage);
         attackCooldownTimer = attackCooldown;
         coolDownOver = false;
 
