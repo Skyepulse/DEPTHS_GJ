@@ -1172,6 +1172,7 @@ GameObject:
   - component: {fileID: 4171431476030624745}
   - component: {fileID: 165671376316501689}
   - component: {fileID: 2558611461864336238}
+  - component: {fileID: 395808322372280708}
   m_Layer: 8
   m_Name: Walls
   m_TagString: Untagged
@@ -2910,6 +2911,33 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!50 &395808322372280708
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989945336678946251}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &7350131967994135003
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,9 +3012,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3217563003569366993}
   - component: {fileID: 4899923450294788311}
-  - component: {fileID: 7659143800529548837}
   - component: {fileID: 7297839768417065041}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: RoomLou02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3041,33 +3068,6 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 5941481576836304264}
   - {fileID: 370513428722331233}
---- !u!50 &7659143800529548837
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8025420712704762831}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &7297839768417065041
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -86,7 +86,6 @@ public class EnemyTank : Enemy
     private void Attack(Vector2 targetPosition)
     {
 
-        //Raycast to check if the attack hits an obstacle
 
         // pose COLLISION object on detected location
         //add child attack object to the enemy
@@ -136,13 +135,13 @@ public class EnemyTank : Enemy
             //check if player is in range
             moveTo(playerPosition);
 
-            /* RaycastHit2D hit = Physics2D.Raycast(transform.position, playerPosition - (Vector2)transform.position, detectRange, LayerMask.GetMask("Obstacle"));
-             if (hit.collider != null)
-             {
-                 // If the raycast hits an obstacle, do not attack
-                 //Debug.Log("Obstacle detected in between");
-                 return;
-             }*/
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, playerPosition - (Vector2)transform.position, detectRange, LayerMask.GetMask("Obstacle"));
+            if (hit.collider != null)
+            {
+                // If the raycast hits an obstacle, do not attack
+                //Debug.Log("Obstacle detected in between");
+                return;
+            }
 
             float distanceToPlayer = Vector2.Distance(transform.position, playerPosition);
 
