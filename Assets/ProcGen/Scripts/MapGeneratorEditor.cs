@@ -1,9 +1,18 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(MapGenerator))]
+#endif
+#if UNITY_EDITOR
 public class MapGeneratorEditor : Editor
+#else
+public class MapGeneratorEditor
+#endif
 {
+    #if UNITY_EDITOR
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -21,4 +30,5 @@ public class MapGeneratorEditor : Editor
             mapGenerator.ClearMap();
         }
     }
+    #endif
 }

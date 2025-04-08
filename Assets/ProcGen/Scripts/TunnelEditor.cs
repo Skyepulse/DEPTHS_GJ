@@ -1,9 +1,15 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-
 [CustomEditor(typeof(Tunnel))]
+#endif
+#if UNITY_EDITOR
 public class TunnelEditor : Editor
+#else
+public class TunnelEditor
+#endif
 {
+    #if UNITY_EDITOR
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -22,4 +28,5 @@ public class TunnelEditor : Editor
             tunnel.SetState(state);
         }
     }
+    #endif
 }

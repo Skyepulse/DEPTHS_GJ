@@ -1257,7 +1257,7 @@ MonoBehaviour:
   - roomCount: 3
     difficultyLevel: 1
     maxRoomEnemies: 2
-    depthColor: {r: 0.5892963, g: 0.94271684, b: 0.9811321, a: 0}
+    depthColor: {r: 0.68238986, g: 0.968239, b: 1, a: 0}
     SpawnPoint: {x: 0, y: 0, z: 0}
     enemies: []
     enemyPrefabs:
@@ -1267,7 +1267,7 @@ MonoBehaviour:
   - roomCount: 5
     difficultyLevel: 2
     maxRoomEnemies: 2
-    depthColor: {r: 0.369922, g: 0.70440245, b: 0.65757513, a: 0}
+    depthColor: {r: 0.561113, g: 0.8881868, b: 0.9245283, a: 0}
     SpawnPoint: {x: 0, y: 0, z: 0}
     enemies: []
     enemyPrefabs:
@@ -1279,7 +1279,7 @@ MonoBehaviour:
   - roomCount: 7
     difficultyLevel: 0
     maxRoomEnemies: 3
-    depthColor: {r: 0.31790662, g: 0.48871177, b: 0.59119487, a: 0}
+    depthColor: {r: 0.36187243, g: 0.6418476, b: 0.67295593, a: 0}
     SpawnPoint: {x: 0, y: 0, z: 0}
     enemies: []
     enemyPrefabs:
