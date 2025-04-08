@@ -24,6 +24,7 @@ public class EnemyKamikaze : Enemy
     private bool hasExploded = false;
     private bool countingDown = false;
     private bool moving = true;
+    private Vector2 lastTargetPosition;
     void Start()
     {
         FieldOfView = GetComponent<CircleCollider2D>();
@@ -54,10 +55,10 @@ public class EnemyKamikaze : Enemy
             explodeCountdown -= Time.deltaTime;
             if (explodeCountdown <= 0)
             {
-                PlayerController player = lastCollision.gameObject.transform.parent.GetComponent<PlayerController>();
-                if (player != null)
+
+                if (lastTargetPosition != null)
                 {
-                    Explode(player);
+                    Explode(lastTargetPosition);
                 }
             }
         }
@@ -91,11 +92,12 @@ public class EnemyKamikaze : Enemy
                 countingDown = true;
                 StartCoroutine(BlinkRed());
                 moving = false; // Stop moving when in attack range
+                lastTargetPosition = playerPosition; // Store the target position for explosion
             }
         }
     }
 
-    private void Explode(PlayerController player)
+    private void Explode(Vector2 targetPosition)
     {
         if (hasExploded) return;
         hasExploded = true;
@@ -108,7 +110,7 @@ public class EnemyKamikaze : Enemy
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
-        attack((Vector2)player.transform.position);
+        attack(targetPosition);
 
         // Optional: delay before destruction to show explosion
         Destroy(gameObject, explodeDelay);
